@@ -2,6 +2,7 @@
 import recipes from "./data/recipes.js";
 console.log(recipes); 
 
+// Template de card pour les recettes stockées dans les données
 recipes.forEach (recipe => {
     const recipeSection = document.querySelector(".container_recipes");
     const recipeCard = document.createElement("div");
@@ -57,4 +58,46 @@ recipes.forEach (recipe => {
     recipeContent.appendChild(recipeIngredients);
 
     recipeSection.appendChild(recipeCard);
+});
+
+
+// Boutons de filtres
+const btnFilter = document.querySelectorAll(".btn_filter");
+const btnDropdown = document.querySelector(".dropdown_filter");
+const btnArrow = document.querySelector(".fa-chevron-down")
+
+btnFilter.forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (!btnDropdown.classList.contains("max-h-80")) {
+            btnDropdown.classList.remove("max-h-0");
+            btnDropdown.classList.add("max-h-80");
+            btn.classList.add("rounded-b-none");
+            btnArrow.style.rotate = "-180deg";
+        } else {
+            btnDropdown.classList.add("max-h-0");
+            btnDropdown.classList.remove("max-h-80");
+            btn.classList.remove("rounded-b-none");
+            btnArrow.style.rotate = "0deg";
+        }
+    });
+});
+
+window.onclick = function (e) {
+    if (!e.target.classList.contains("btn_filter")) {
+        btnDropdown.classList.add("max-h-0");
+        btnDropdown.classList.remove("max-h-80");
+        btnArrow.style.rotate = "0deg";
+        btnFilter.forEach(btn =>{
+            btn.classList.remove("rounded-b-none");
+        })
+    }
+};
+
+
+// Empêcher la propagation du clic sur l'input
+const inputs = document.querySelectorAll(".dropdown_filter input");
+inputs.forEach(input => {
+    input.addEventListener("click", (event) => {
+        event.stopPropagation();
+    });
 });
