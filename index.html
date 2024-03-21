@@ -36,17 +36,19 @@
 
     <!--Contenu principal de la page-->
     <main class="bg-grey1 py-5 px-40 flex flex-col gap-14">
+
+        <!--Barre de filtres-->
         <div class="flex items-center justify-between">
             <div class="filterbar flex gap-16">
-                <button class="rounded-xl bg-white w-48 p-4 flex items-center justify-between">
+                <button class="btn_filter">
                     <p class="font-content text-black1 text-base">Ingrédients</p>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
-                <button class="rounded-xl bg-white w-48 p-4 flex items-center justify-between">
+                <button class="btn_filter">
                     <p class="font-content text-black1 text-base">Appareils</p>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
-                <button class="rounded-xl bg-white w-48 p-4 flex items-center justify-between">
+                <button class="btn_filter">
                     <p class="font-content text-black1 text-base">Ustensiles</p>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
@@ -56,127 +58,14 @@
             </div>
         </div>
 
-        <section class="container_recipes flex gap-12">
-            <div class="bg-white flex flex-col gap-8 rounded-2xl shadow-xl overflow-hidden w-1/3 relative">
-                <div class="absolute top-5 right-5 bg-yellow1 rounded-xl px-4 py-1">
-                    <p class="font-content text-xs">10min</p>
-                </div>
-                <img src="./assets/recipes/Recette01.jpg" alt="" class="object-cover h-60">
-                <h3 class="font-title mx-6">Limonade de coco</h3>
-                <div class="flex flex-col gap-8 mb-10 mx-6">
-                    <div class="flex flex-col gap-4">
-                        <h4 class="uppercase font-content text-xs">Recette</h4>
-                        <p class="text-sm">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <h4 class="uppercase font-content text-xs">Ingrédients</h4>
-                        <div class="flex flex-wrap">
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Lait de coco</h5>
-                                <p class="text-grey2 font-content text-sm">400mL</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Jus de citron</h5>
-                                <p class="text-grey2 font-content text-sm">2</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Crème de coco</h5>
-                                <p class="text-grey2 font-content text-sm">4 cuillères</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Sucre</h5>
-                                <p class="text-grey2 font-content text-sm">20g</p>
-                            </div class="w-1/2">
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Glaçons</h5>
-                                <p class="text-grey2 font-content text-sm">2</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white flex flex-col gap-8 rounded-2xl shadow-xl overflow-hidden w-1/3 relative">
-                <div class="absolute top-5 right-5 bg-yellow1 rounded-xl px-4 py-1">
-                    <p class="font-content text-xs">10min</p>
-                </div>
-                <img src="./assets/recipes/Recette01.jpg" alt="" class="object-cover h-60">
-                <h3 class="font-title mx-6">Limonade de coco</h3>
-                <div class="flex flex-col gap-8 mb-10 mx-6">
-                    <div class="flex flex-col gap-4">
-                        <h4 class="uppercase font-content text-xs">Recette</h4>
-                        <p class="text-sm">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <h4 class="uppercase font-content text-xs">Ingrédients</h4>
-                        <div class="flex flex-wrap">
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Lait de coco</h5>
-                                <p class="text-grey2 font-content text-sm">400mL</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Jus de citron</h5>
-                                <p class="text-grey2 font-content text-sm">2</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Crème de coco</h5>
-                                <p class="text-grey2 font-content text-sm">4 cuillères</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Sucre</h5>
-                                <p class="text-grey2 font-content text-sm">20g</p>
-                            </div class="w-1/2">
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Glaçons</h5>
-                                <p class="text-grey2 font-content text-sm">2</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white flex flex-col gap-8 rounded-2xl shadow-xl overflow-hidden w-1/3 relative">
-                <div class="absolute top-5 right-5 bg-yellow1 rounded-xl px-4 py-1">
-                    <p class="font-content text-xs">10min</p>
-                </div>
-                <img src="./assets/recipes/Recette01.jpg" alt="" class="object-cover h-60">
-                <h3 class="font-title mx-6">Limonade de coco</h3>
-                <div class="flex flex-col gap-8 mb-10 mx-6">
-                    <div class="flex flex-col gap-4">
-                        <h4 class="uppercase font-content text-xs">Recette</h4>
-                        <p class="text-sm">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <h4 class="uppercase font-content text-xs">Ingrédients</h4>
-                        <div class="flex flex-wrap">
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Lait de coco</h5>
-                                <p class="text-grey2 font-content text-sm">400mL</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Jus de citron</h5>
-                                <p class="text-grey2 font-content text-sm">2</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Crème de coco</h5>
-                                <p class="text-grey2 font-content text-sm">4 cuillères</p>
-                            </div>
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Sucre</h5>
-                                <p class="text-grey2 font-content text-sm">20g</p>
-                            </div class="w-1/2">
-                            <div class="w-1/2 mb-5">
-                                <h5 class="text-black1 font-content text-sm">Glaçons</h5>
-                                <p class="text-grey2 font-content text-sm">2</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!--Section recettes-->
+        <section class="container_recipes flex gap-12 flex-wrap">
         </section>
 
     </main>
 
     <!--Javascript-->
-    <script type="module" src="./scripts/recipes.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
 </body>
 
 </html>
