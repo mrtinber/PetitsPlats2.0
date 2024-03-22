@@ -76,12 +76,13 @@ recipes.forEach(recipe => {
 
 // Eviter les répétitions dans la liste 
 const uniqueIngredientsSet = new Set(allIngredients);
-const uniqueIngredientsArray = [...uniqueIngredientsSet];
+let uniqueIngredientsArray = [...uniqueIngredientsSet];
 
-//Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
+// Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
 const filterListIngredients = document.querySelector(".filter_list_ingredients")
 
 uniqueIngredientsArray.forEach(element => {
+    console.log(element);
     const filterOption = document.createElement("li");
     filterOption.setAttribute("class", "filter_option");
     filterOption.innerText = `${element}`;
@@ -102,7 +103,7 @@ recipes.forEach(recipe => {
 const uniqueAppliancesSet = new Set(allAppliances);
 const uniqueAppliancesArray = [...uniqueAppliancesSet];
 
-// //Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
+// Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
 const filterListAppliances = document.querySelector(".filter_list_appliances")
 
 uniqueAppliancesArray.forEach(element => {
@@ -128,7 +129,7 @@ recipes.forEach(recipe => {
 const uniqueUtensilsSet = new Set(allUtensils);
 const uniqueUtensilsArray = [...uniqueUtensilsSet];
 
-// //Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
+// Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
 const filterListUtensils = document.querySelector(".filter_list_utensils")
 
 uniqueUtensilsArray.forEach(element => {
@@ -136,4 +137,65 @@ uniqueUtensilsArray.forEach(element => {
     filterOption.setAttribute("class", "filter_option");
     filterOption.innerText = `${element}`;
     filterListUtensils.appendChild(filterOption);
+});
+
+// Ecoute de l'input pour mettre à jour les listes des filtres
+const inputIngredients = inputs[0];
+console.log(inputIngredients);
+inputIngredients.addEventListener("input", () => {
+    const inputValue = inputIngredients.value.toLowerCase();
+    console.log(inputValue);
+
+    // Vider la liste existante des filtres
+    filterListIngredients.innerHTML = "";
+
+    uniqueIngredientsArray.forEach(element => {
+        const lowercaseElement = element.toLowerCase(); 
+        if (lowercaseElement.includes(inputValue)) { 
+            const filterOption = document.createElement("li");
+            filterOption.setAttribute("class", "filter_option");
+            filterOption.innerText = element;
+            filterListIngredients.appendChild(filterOption);
+        }
+    });
+});
+
+const inputAppliances = inputs[1];
+console.log(inputAppliances);
+inputAppliances.addEventListener("input", () => {
+    const inputValue = inputAppliances.value.toLowerCase();
+    console.log(inputValue);
+
+    // Vider la liste existante des filtres
+    filterListAppliances.innerHTML = "";
+
+    uniqueAppliancesArray.forEach(element => {
+        const lowercaseElement = element.toLowerCase(); 
+        if (lowercaseElement.includes(inputValue)) { 
+            const filterOption = document.createElement("li");
+            filterOption.setAttribute("class", "filter_option");
+            filterOption.innerText = element;
+            filterListAppliances.appendChild(filterOption);
+        }
+    });
+});
+
+const inputUtensils = inputs[2];
+console.log(inputUtensils);
+inputUtensils.addEventListener("input", () => {
+    const inputValue = inputUtensils.value.toLowerCase();
+    console.log(inputValue);
+
+    // Vider la liste existante des filtres
+    filterListUtensils.innerHTML = "";
+
+    uniqueUtensilsArray.forEach(element => {
+        const lowercaseElement = element.toLowerCase(); 
+        if (lowercaseElement.includes(inputValue)) { 
+            const filterOption = document.createElement("li");
+            filterOption.setAttribute("class", "filter_option");
+            filterOption.innerText = element;
+            filterListUtensils.appendChild(filterOption);
+        }
+    });
 });
