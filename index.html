@@ -42,30 +42,42 @@
             <div class="filterbar flex gap-16">
                 <button class="btn_filter relative">
                     <p class="font-content text-black1 text-base">Ingrédients</p>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down duration-300"></i>
                     <div class="dropdown_filter">
                         <div class="flex items-center w-[calc(100%-2rem)] m-4 relative">
                             <input type="search" class="filter_search">
-                            <i class="fa-solid fa-magnifying-glass text-grey2 absolute right-2 inset-y-auto"></i>
+                            <i class="fa-solid fa-magnifying-glass text-grey2 absolute right-2 inset-y-auto hover:scale-110 duration-200"></i>
                         </div>
-                        <ul class="text-left">
-                            <li class="filter_option">Jus de citron</li>
-                            <li class="filter_option">Glaçons</li>
-                            <li class="filter_option">Tomate</li>
-                            <li class="filter_option">Poulet</li>
-                            <li class="filter_option">Poivron rouge</li>
-                            <li class="filter_option">Thon en miettes</li>
-                            <li class="filter_option">Vinaigrette</li>
+                        <ul class="filter_list_ingredients text-left">
+                            <!-- Là où sont stockés les <li> pour chaque ingrédient disponible -->
                         </ul>
                     </div>
                 </button>
-                <button class="btn_filter">
+                <button class="btn_filter relative">
                     <p class="font-content text-black1 text-base">Appareils</p>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down duration-300"></i>
+                    <div class="dropdown_filter">
+                        <div class="flex items-center w-[calc(100%-2rem)] m-4 relative">
+                            <input type="search" class="filter_search">
+                            <i class="fa-solid fa-magnifying-glass text-grey2 absolute right-2 inset-y-auto hover:scale-110 duration-200"></i>
+                        </div>
+                        <ul class="filter_list_appliances text-left">
+                            <!-- Là où sont stockés les <li> pour chaque appareil disponible -->
+                        </ul>
+                    </div>
                 </button>
-                <button class="btn_filter">
+                <button class="btn_filter relative">
                     <p class="font-content text-black1 text-base">Ustensiles</p>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down duration-300"></i>
+                    <div class="dropdown_filter">
+                        <div class="flex items-center w-[calc(100%-2rem)] m-4 relative">
+                            <input type="search" class="filter_search">
+                            <i class="fa-solid fa-magnifying-glass text-grey2 absolute right-2 inset-y-auto hover:scale-110 duration-200"></i>
+                        </div>
+                        <ul class="filter_list_utensils text-left">
+                            <!-- Là où sont stockés les <li> pour chaque ustensile disponible -->
+                        </ul>
+                    </div>
                 </button>
             </div>
             <div>
@@ -77,7 +89,7 @@
         <div class="flex items-center justify-between">
             <div class="rounded-xl bg-yellow1 p-4 flex items-center gap-14">
                 <p>Crème de coco</p>
-                <i class="fa-solid fa-xmark cursor-pointer"></i>
+                <i class="fa-solid fa-xmark cursor-pointer duration-200 hover:scale-125"></i>
             </div>
         </div>
 

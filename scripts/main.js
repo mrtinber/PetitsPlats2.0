@@ -1,95 +1,55 @@
-//Importation des données des recettes
 import recipes from "./data/recipes.js";
-console.log(recipes); 
+import { cardTemplate } from "./templates/recipeCard.js";
 
-// Template de card pour les recettes stockées dans les données
-recipes.forEach (recipe => {
-    const recipeSection = document.querySelector(".container_recipes");
-    const recipeCard = document.createElement("div");
-    recipeCard.classList.add("card_recipe");
+console.log(recipes);
 
-    const recipeTime = document.createElement("div");
-    recipeTime.setAttribute("class", "recipe_time");
-    recipeTime.innerHTML = `
-        <p class="font-content text-xs">${recipe.time}min</p>
-    `
-    recipeCard.appendChild(recipeTime);
-    
-    const recipePicture = document.createElement("img");
-    recipePicture.setAttribute("src", `assets/recipes/${recipe.image}`);
-    recipePicture.setAttribute("class", "object-cover h-60");
-    recipeCard.appendChild(recipePicture);
-
-    const recipeTitle = document.createElement("h3");
-    recipeTitle.setAttribute("class", "font-title mx-6");
-    recipeTitle.innerText = `${recipe.name}`;
-    recipeCard.appendChild(recipeTitle);
-
-    const recipeContent = document.createElement("div");
-    recipeContent.setAttribute("class", "recipe_content");
-    const recipeInstructions = document.createElement("div");
-    recipeInstructions.setAttribute("class", "flex flex-col gap-4")
-    recipeInstructions.innerHTML = `
-            <h4 class="uppercase font-content text-xs">Recette</h4>
-            <p class="text-sm overflow-hidden text-ellipsis text-justify h-20">${recipe.description}</p>
-    `
-    const recipeIngredients = document.createElement("div");
-    recipeIngredients.setAttribute("class", "flex flex-col gap-4")
-    recipeIngredients.innerHTML = `
-        <h4 class="uppercase font-content text-xs">Ingrédients</h4>
-    `
-
-    const ingredientsWrapper = document.createElement("div");
-    ingredientsWrapper.setAttribute("class", "flex flex-wrap");
-    recipeIngredients.appendChild(ingredientsWrapper);
-
-    recipe.ingredients.forEach(ingredient => {
-        const ingredientUnit = document.createElement("div");
-        ingredientUnit.setAttribute("class", "w-1/2 mb-5");
-        ingredientUnit.innerHTML = `
-            <h5 class="text-black1 font-content text-sm font-medium">${ingredient.ingredient}</h5>
-            <p class="text-grey2 font-content text-sm">${ingredient.quantity ? ingredient.quantity : "" } ${ingredient.unit ? ingredient.unit : ""}</p>
-        `
-        ingredientsWrapper.appendChild(ingredientUnit);
-    });
-
-    recipeCard.appendChild(recipeContent);
-    recipeContent.appendChild(recipeInstructions);
-    recipeContent.appendChild(recipeIngredients);
-
-    recipeSection.appendChild(recipeCard);
-});
-
+// Génération des cards pour chaque recette dans les données
+cardTemplate(recipes);
 
 // Boutons de filtres
 const btnFilter = document.querySelectorAll(".btn_filter");
-const btnDropdown = document.querySelector(".dropdown_filter");
-const btnArrow = document.querySelector(".fa-chevron-down")
+const btnDropdown = document.querySelectorAll(".dropdown_filter");
+const btnArrow = document.querySelectorAll(".fa-chevron-down");
 
-btnFilter.forEach(btn => {
-    btn.addEventListener("click", () => {
-        if (!btnDropdown.classList.contains("max-h-80")) {
-            btnDropdown.classList.remove("max-h-0");
-            btnDropdown.classList.add("max-h-80");
-            btn.classList.add("rounded-b-none");
-            btnArrow.style.rotate = "-180deg";
+for (let i = 0; i < btnFilter.length; i++) {
+    btnFilter[i].addEventListener("click", () => {
+        if (!btnDropdown[i].classList.contains("max-h-80")) {
+            btnDropdown[i].classList.remove("max-h-0");
+            btnDropdown[i].classList.add("max-h-80");
+            btnFilter[i].classList.add("rounded-b-none");
+            btnArrow[i].style.rotate = "-180deg";
         } else {
-            btnDropdown.classList.add("max-h-0");
-            btnDropdown.classList.remove("max-h-80");
-            btn.classList.remove("rounded-b-none");
-            btnArrow.style.rotate = "0deg";
+            btnDropdown[i].classList.add("max-h-0");
+            btnDropdown[i].classList.remove("max-h-80");
+            btnFilter[i].classList.remove("rounded-b-none");
+            btnArrow[i].style.rotate = "0deg";
         }
     });
-});
+}
+
+// Fonction pour fermer tous les dropdowns sauf celui qui est actuellement ouvert
+function closeAllDropdowns() {
+    const allDropdowns = document.querySelectorAll(".dropdown_filter");
+    const allBtns = document.querySelectorAll(".btn_filter");
+    const allArrows = document.querySelectorAll(".fa-chevron-down");
+
+    allDropdowns.forEach(dropdown => {
+        dropdown.classList.add("max-h-0");
+        dropdown.classList.remove("max-h-80");
+    });
+
+    allBtns.forEach(btn => {
+        btn.classList.remove("rounded-b-none");
+    });
+
+    allArrows.forEach(arrow => {
+        arrow.style.rotate = "0deg";
+    });
+}
 
 window.onclick = function (e) {
     if (!e.target.classList.contains("btn_filter")) {
-        btnDropdown.classList.add("max-h-0");
-        btnDropdown.classList.remove("max-h-80");
-        btnArrow.style.rotate = "0deg";
-        btnFilter.forEach(btn =>{
-            btn.classList.remove("rounded-b-none");
-        })
+        closeAllDropdowns();
     }
 };
 
@@ -100,4 +60,80 @@ inputs.forEach(input => {
     input.addEventListener("click", (event) => {
         event.stopPropagation();
     });
+});
+
+// Retrouver les ingrédients dans le tableau
+let allIngredients = [];
+
+recipes.forEach(recipe => {
+    const Ingredients = recipe.ingredients;
+    Ingredients.forEach(unit => {
+        const unitIngredient = unit.ingredient;
+        const normalizedIngredient = unitIngredient.charAt(0).toUpperCase() + unitIngredient.slice(1).toLowerCase();
+        allIngredients.push(normalizedIngredient);
+    });
+});
+
+// Eviter les répétitions dans la liste 
+const uniqueIngredientsSet = new Set(allIngredients);
+const uniqueIngredientsArray = [...uniqueIngredientsSet];
+
+//Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
+const filterListIngredients = document.querySelector(".filter_list_ingredients")
+
+uniqueIngredientsArray.forEach(element => {
+    const filterOption = document.createElement("li");
+    filterOption.setAttribute("class", "filter_option");
+    filterOption.innerText = `${element}`;
+    filterListIngredients.appendChild(filterOption);
+})
+
+
+// Retrouver tous les appareils disponibles dans les recettes
+let allAppliances = [];
+
+recipes.forEach(recipe => {
+    const Appliance = recipe.appliance;
+    const normalizedAppliance = Appliance.charAt(0).toUpperCase() + Appliance.slice(1).toLowerCase();
+    allAppliances.push(normalizedAppliance);
+});
+
+// Eviter les répétitions dans la liste 
+const uniqueAppliancesSet = new Set(allAppliances);
+const uniqueAppliancesArray = [...uniqueAppliancesSet];
+
+// //Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
+const filterListAppliances = document.querySelector(".filter_list_appliances")
+
+uniqueAppliancesArray.forEach(element => {
+    const filterOption = document.createElement("li");
+    filterOption.setAttribute("class", "filter_option");
+    filterOption.innerText = `${element}`;
+    filterListAppliances.appendChild(filterOption);
+});
+
+// Retrouver tous les ustensiles disponibles dans les recettes
+let allUtensils = [];
+
+recipes.forEach(recipe => {
+    const Utensils = recipe.ustensils;
+    Utensils.forEach(unit => {
+        const Utensil = unit;
+        const normalizedUtensil = Utensil.charAt(0).toUpperCase() + Utensil.slice(1).toLowerCase();
+        allUtensils.push(normalizedUtensil);
+    });
+});
+
+// Eviter les répétitions dans la liste 
+const uniqueUtensilsSet = new Set(allUtensils);
+const uniqueUtensilsArray = [...uniqueUtensilsSet];
+
+// //Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
+const filterListUtensils = document.querySelector(".filter_list_utensils")
+
+uniqueUtensilsArray.forEach(element => {
+    const filterOption = document.createElement("li");
+    filterOption.setAttribute("class", "filter_option");
+    filterOption.innerText = `${element}`;
+    filterListUtensils.appendChild(filterOption);
 });

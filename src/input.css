@@ -4,10 +4,16 @@
 
 @layer components {
     .card_recipe {
-        @apply bg-white flex flex-col gap-8 rounded-2xl shadow-xl overflow-hidden w-[calc((100%-6rem)/3)] relative; 
+        @apply bg-white flex flex-col gap-8 rounded-2xl shadow-xl overflow-hidden w-[calc((100%-6rem)/3)] relative transition-shadow duration-300 ease-in-out; 
+    }
+    .card_recipe:hover{
+        @apply shadow-2xl;
     }
     .btn_filter {
-        @apply rounded-xl bg-white w-48 p-4 flex items-center justify-between;
+        @apply rounded-xl bg-white w-48 p-4 flex items-center justify-between transition-shadow duration-300 ease-in-out;
+    }
+    .btn_filter:hover {
+        @apply shadow;
     }
     .recipe_content {
         @apply flex flex-col gap-8 mb-10 mx-6; 
@@ -16,7 +22,7 @@
         @apply absolute top-5 right-5 bg-yellow1 rounded-xl px-4 py-1;
     }
     .btn_search {
-        @apply absolute rounded-xl h-12 w-12 bg-black1 right-2.5;
+        @apply absolute rounded-xl h-12 w-12 bg-black1 right-2.5 duration-300;
     }
     .btn_search:hover {
         @apply bg-yellow1;
@@ -29,13 +35,13 @@
     }
 
     .filter_option {
-        @apply px-4 py-2 text-black1 text-sm;
+        @apply px-4 py-2 text-black1 text-sm duration-200;
     }
     .filter_option:hover{
         @apply bg-yellow1;
     }
     .dropdown_filter{
-        @apply max-h-0 overflow-hidden absolute top-full left-0 w-48 bg-white rounded-b-xl z-50 shadow-sm;
+        @apply max-h-0 overflow-hidden absolute top-full left-0 w-48 bg-white rounded-b-xl z-50 shadow-sm overflow-y-auto duration-300 ease-in-out;
     }
     .filter_search{
         @apply border border-grey3 rounded-sm w-full py-2 pl-2 pr-6 text-grey2;
@@ -48,5 +54,8 @@
       appearance: none;
       background-image: url('../assets/base/xmark-solid.svg');
       @apply bg-center bg-no-repeat bg-contain cursor-pointer h-3 w-3 opacity-60;
+    }
+    .dropdown_filter::-webkit-scrollbar {
+        display: none;
     }
   }
