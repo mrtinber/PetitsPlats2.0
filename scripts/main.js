@@ -95,7 +95,6 @@ let uniqueIngredientsArray = [...uniqueIngredientsSet];
 const filterListIngredients = document.querySelector(".filter_list_ingredients")
 
 uniqueIngredientsArray.forEach(element => {
-    console.log(element);
     const filterOption = document.createElement("li");
     filterOption.setAttribute("class", "filter_option");
     filterOption.innerText = `${element}`;
@@ -212,3 +211,64 @@ inputUtensils.addEventListener("input", () => {
         }
     });
 })
+
+
+// Implémentation de la recherche avec boucles natives (for, while, ...)
+
+const mainSearchbar = document.querySelector("nav input");
+
+mainSearchbar.addEventListener("input", () =>{
+    const inputValue = mainSearchbar.value.toLowerCase();
+    console.log(inputValue);
+    const newList = [];
+    const recipeContainer = document.querySelector(".container_recipes");
+
+    if(inputValue.length >= 3){
+        console.log("C'est bon on peut lancer la recherche")
+        for(let i=0; i < recipes.length; i++){
+
+            let foundInName = false;
+            let foundInDescription = false;
+            let foundInIngredients = false;
+
+            // Utilisation d'une boucle pour vérifier chaque caractère du nom de la recette
+            for (let j = 0; j <= recipes[i].name.length - inputValue.length; j++) {
+                // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
+                if (recipes[i].name.substring(j, j + inputValue.length).toLowerCase() === inputValue) {
+                    foundInName = true;
+                    break; // Sortir de la boucle interne si une correspondance est trouvée
+                }
+            }
+            // Utilisation d'une boucle pour vérifier chaque caractère du nom de la recette
+            for (let j = 0; j <= recipes[i].description.length - inputValue.length; j++) {
+                // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
+                if (recipes[i].description.substring(j, j + inputValue.length).toLowerCase() === inputValue) {
+                    foundInDescription = true;
+                    break; // Sortir de la boucle interne si une correspondance est trouvée
+                }
+            }
+            // Utilisation d'une boucle pour vérifier chaque caractère du nom de la recette
+            for (let j = 0; j < recipes[i].ingredients.length; j++){
+                const itemIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
+                for (let k = 0; k <= itemIngredients.length - inputValue.length; k++) {
+                    // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
+                    if (itemIngredients.substring(k, k + inputValue.length).toLowerCase() === inputValue) {
+                        foundInIngredients = true;
+                        break; // Sortir de la boucle interne si une correspondance est trouvée
+                    }
+                }
+            } 
+            // Affichage de la recette si une correspondance est trouvée dans au moins l'une des parties de la recette
+            if (foundInName || foundInDescription || foundInIngredients) {
+                newList.push(recipes[i]);
+                console.log("Nouvelle liste", newList);
+                recipeContainer.innerHTML = "";
+                cardTemplate(newList);
+            }   
+        }
+    }else{
+        console.log("L'input n'est pas assez long")
+        recipeContainer.innerHTML = "";
+        cardTemplate(recipes);
+    }
+});
