@@ -1,8 +1,6 @@
 import recipes from "./data/recipes.js";
 import { cardTemplate } from "./templates/recipeCard.js";
 
-console.log(recipes);
-
 // Génération des cards pour chaque recette dans les données
 cardTemplate(recipes);
 
@@ -153,7 +151,6 @@ uniqueUtensilsArray.forEach(element => {
 
 // Ecoute de l'input pour mettre à jour les listes des filtres
 const inputIngredients = inputs[0];
-console.log(inputIngredients);
 inputIngredients.addEventListener("input", () => {
     const inputValue = inputIngredients.value.toLowerCase();
     console.log(inputValue);
@@ -173,7 +170,6 @@ inputIngredients.addEventListener("input", () => {
 });
 
 const inputAppliances = inputs[1];
-console.log(inputAppliances);
 inputAppliances.addEventListener("input", () => {
     const inputValue = inputAppliances.value.toLowerCase();
     console.log(inputValue);
@@ -193,7 +189,6 @@ inputAppliances.addEventListener("input", () => {
 });
 
 const inputUtensils = inputs[2];
-console.log(inputUtensils);
 inputUtensils.addEventListener("input", () => {
     const inputValue = inputUtensils.value.toLowerCase();
     console.log(inputValue);
@@ -216,12 +211,12 @@ inputUtensils.addEventListener("input", () => {
 // Implémentation de la recherche avec boucles natives (for, while, ...)
 
 const mainSearchbar = document.querySelector("nav input");
+const recipeContainer = document.querySelector(".container_recipes");
 
 mainSearchbar.addEventListener("input", () =>{
     const inputValue = mainSearchbar.value.toLowerCase();
     console.log(inputValue);
-    const newList = [];
-    const recipeContainer = document.querySelector(".container_recipes");
+    let newList = [];
 
     if(inputValue.length >= 3){
         console.log("C'est bon on peut lancer la recherche")
@@ -239,22 +234,20 @@ mainSearchbar.addEventListener("input", () =>{
                     break; // Sortir de la boucle interne si une correspondance est trouvée
                 }
             }
-            // Utilisation d'une boucle pour vérifier chaque caractère du nom de la recette
+            // Utilisation d'une boucle pour vérifier chaque caractère de la description de la recette
             for (let j = 0; j <= recipes[i].description.length - inputValue.length; j++) {
-                // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
                 if (recipes[i].description.substring(j, j + inputValue.length).toLowerCase() === inputValue) {
                     foundInDescription = true;
-                    break; // Sortir de la boucle interne si une correspondance est trouvée
+                    break;
                 }
             }
-            // Utilisation d'une boucle pour vérifier chaque caractère du nom de la recette
+            // Utilisation d'une boucle pour vérifier chaque caractère des ingrédients de la recette
             for (let j = 0; j < recipes[i].ingredients.length; j++){
                 const itemIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
                 for (let k = 0; k <= itemIngredients.length - inputValue.length; k++) {
-                    // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
                     if (itemIngredients.substring(k, k + inputValue.length).toLowerCase() === inputValue) {
                         foundInIngredients = true;
-                        break; // Sortir de la boucle interne si une correspondance est trouvée
+                        break;
                     }
                 }
             } 
@@ -272,3 +265,120 @@ mainSearchbar.addEventListener("input", () =>{
         cardTemplate(recipes);
     }
 });
+
+// Création des tags à la sélection d'un élément dans les filtres
+const optionList = document.querySelectorAll(".filter_option");
+const tagBar = document.querySelector(".tag_bar");
+let tagList = [];
+let newList = [];
+
+optionList.forEach(option => {
+
+    option.addEventListener("click", () =>{
+        // Ajout du tag sous la barre de filtres
+        const newTag = document.createElement("div");
+        newTag.setAttribute("class", "filter_tag");
+        newTag.innerHTML = `
+            <p>${option.innerText}</p>
+            <i class="fa-solid fa-xmark cursor-pointer duration-200 hover:scale-125"></i>
+        `;
+        tagBar.appendChild(newTag);
+        tagList.push(newTag);
+
+        //Ajout du tag dans la liste déroulante
+        const newListTag = document.createElement("div");
+        const dropdownFilter = document.querySelector('.dropdown_filter');
+        const filterListIngredients = document.querySelector('.filter_list_ingredients');
+        
+        newListTag.setAttribute("class", "chosen_option");
+        newListTag.innerHTML = `
+            <p>${option.innerText}</p>
+            <i class="fa-solid fa-circle-xmark cursor-pointer duration-200 hover:scale-125"></i>
+        `
+        dropdownFilter.insertBefore(newListTag, filterListIngredients);
+
+        // Ajout de l'écouteur d'événement de suppression à ce tag
+        const removeBtn = newTag.querySelector(".fa-xmark");
+        removeBtn.addEventListener("click", () => {
+            newTag.remove();
+            // Retirez l'élément supprimé de la liste tagList
+            const index = tagList.indexOf(newTag);
+            if (index !== -1) {
+                tagList.splice(index, 1);
+            }
+            recipeContainer.innerHTML = "";
+            filterUpdate(recipes, tagList); // Mise à jour des recettes affichées après suppression
+
+            // Afficher toutes les recettes après suppression de tous les filtres
+            if (tagList.length === 0){
+                cardTemplate(recipes);
+            }
+        });
+
+        filterUpdate(recipes, tagList); // Mettez à jour les recettes après l'ajout d'un tag
+    });
+});
+
+// Mise à jour de la liste de recettes disponibles
+function filterUpdate(recipes, tagList) {
+    let tagText = [];
+    tagList.forEach(element => {
+        const textElement = element.innerText.toLowerCase();
+        tagText.push(textElement);
+    });
+
+    console.log("tagtext", tagText);
+    console.log("taglist", tagList);
+    // Reset newList à chaque nouvelle mise à jour
+    newList = [];
+
+    for(let i=0; i < recipes.length; i++) {
+        let foundInIngredients = false;
+        let foundInAppliances = false;
+        let foundInUtensils = false; 
+
+
+        for (let t = 0; t < tagList.length; t++) {
+            const tagText = tagList[t].querySelector("p").innerText.toLowerCase();
+            // Utilisation d'une boucle pour vérifier chaque caractère des ingrédients de la recette
+            for (let j = 0; j < recipes[i].ingredients.length; j++) {
+                const itemIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
+                for (let k = 0; k <= itemIngredients.length - tagText.length; k++) {
+                    if (itemIngredients.substring(k, k + tagText.length).toLowerCase() === tagText) {
+                        foundInIngredients = true;
+                        break;
+                    }
+                }
+            } 
+
+            // Utilisation d'une boucle pour vérifier chaque caractère de les appareils de la recette
+            for (let j = 0; j <= recipes[i].appliance.length - tagText.length; j++) {
+                    if (recipes[i].appliance.substring(j, j + tagText.length).toLowerCase() === tagText) {
+                        foundInAppliances = true;
+                        break;
+                    }
+            }
+
+            // Utilisation d'une boucle pour vérifier chaque caractère des ustensiles de la recette
+            for (let j = 0; j < recipes[i].ustensils.length; j++) {
+                const itemUtensils = recipes[i].ustensils[j].toLowerCase();
+                for (let k = 0; k <= itemUtensils.length - tagText.length; k++) {
+                    if (itemUtensils.substring(k, k + tagText.length).toLowerCase() === tagText) {
+                        foundInUtensils = true;
+                        break;
+                    }
+                }
+            } 
+
+            if (foundInIngredients || foundInAppliances || foundInUtensils) {
+                if (!newList.includes(recipes[i])){
+                    newList.push(recipes[i]);
+                }
+            }  
+        }
+    }
+    // Mettre à jour l'affichage des recettes
+    recipeContainer.innerHTML = "";
+    cardTemplate(newList);
+    console.log("newlist", newList);
+}

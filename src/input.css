@@ -46,6 +46,13 @@
     .filter_search{
         @apply border border-grey3 rounded-sm w-full py-2 pl-2 pr-6 text-grey2;
     }
+    .filter_tag{
+        @apply rounded-xl bg-yellow1 p-4 flex items-center gap-14;
+    }
+
+    .chosen_option{
+        @apply bg-yellow1 px-4 py-2 text-black1 text-sm flex items-center justify-between duration-200;
+    }
 }
 
 @layer utilities {
