@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-css": "tailwindcss build -i ./src/input.css -o ./css/style.css",
-    "watch": "tailwindcss build -i ./src/input.css -o ./css/style.css" 
+    "watch": "tailwindcss build -i ./src/input.css -o ./css/style.css --watch" 
   },
   "author": "",
   "license": "ISC",
