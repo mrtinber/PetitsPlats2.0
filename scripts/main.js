@@ -25,7 +25,7 @@ function init(recipes, newList) {
     setTags(recipes);
     // Recherche de recettes correspondantes via la barre principale
     searchRecipes(recipes, newList);
-
+    // Génère le nombre de recettes affichées sur la page
     updateRecipeNumber(recipes);
 }
 
@@ -92,7 +92,6 @@ export function filterUpdate(recipes, tagList) {
 }
 
 export function updateRecipeNumber (newList){
-    console.log("from updaterecipenumber", newList);
     const nbRecipes = document.getElementById("nbRecipes");
     const number = newList.length
 
