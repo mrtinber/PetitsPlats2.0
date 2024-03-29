@@ -71,12 +71,10 @@ export function displayTags (){
                 // Après avoir supprimé un nouveau tag
                 filterUpdate(newList, tagList);
 
-                const filterListIngredients = document.querySelector(".filter_list_ingredients")
-                const filterListAppliances = document.querySelector(".filter_list_appliances")
-                const filterListUtensils = document.querySelector(".filter_list_utensils")
-                filterListIngredients.innerHTML = ""
-                filterListAppliances.innerHTML = ""
-                filterListUtensils.innerHTML = ""
+                let optionList = document.querySelectorAll(".filter_option");
+                optionList.forEach(li => {
+                    li.remove();
+                });
                 setFilters(newList);
                 displayTags()
                 
@@ -84,12 +82,10 @@ export function displayTags (){
                 if (tagList.length === 0){
                     cardTemplate(recipes);
                     updateRecipeNumber(recipes);
-                    const filterListIngredients = document.querySelector(".filter_list_ingredients")
-                    const filterListAppliances = document.querySelector(".filter_list_appliances")
-                    const filterListUtensils = document.querySelector(".filter_list_utensils")
-                    filterListIngredients.innerHTML = ""
-                    filterListAppliances.innerHTML = ""
-                    filterListUtensils.innerHTML = ""
+                    let optionList = document.querySelectorAll(".filter_option");
+                    optionList.forEach(li => {
+                        li.remove();
+                    });
                     setFilters(recipes);
                     displayTags();
                     // Si on vide la liste de tags, on veut qu'il prenne quand même en compte l'input du champ principal 
@@ -110,12 +106,10 @@ export function displayTags (){
             console.log("taglist = ", tagList)
             filterUpdate(recipes, tagList);
 
-            const filterListIngredients = document.querySelector(".filter_list_ingredients")
-            const filterListAppliances = document.querySelector(".filter_list_appliances")
-            const filterListUtensils = document.querySelector(".filter_list_utensils")
-            filterListIngredients.innerHTML = ""
-            filterListAppliances.innerHTML = ""
-            filterListUtensils.innerHTML = ""
+            let optionList = document.querySelectorAll(".filter_option");
+            optionList.forEach(li => {
+                li.remove();
+            });
         
             setFilters(newList);
             displayTags();
