@@ -605,6 +605,7 @@ video {
 .btn_filter {
   display: flex;
   width: 12rem;
+  cursor: pointer;
   align-items: center;
   justify-content: space-between;
   border-radius: 0.75rem;
@@ -753,6 +754,14 @@ input[type="search"]::-webkit-search-cancel-button {
   --tw-text-opacity: 1;
   color: rgb(27 27 27 / var(--tw-text-opacity));
   transition-duration: 200ms;
+}
+
+.chosen_option:hover {
+  font-weight: 700;
+}
+
+.chosen_option:hover i {
+  display: flex !important;
 }
 
 .sr-only {
@@ -1014,6 +1023,10 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .list-item {
   display: list-item;
+}
+
+.\!hidden {
+  display: none !important;
 }
 
 .hidden {

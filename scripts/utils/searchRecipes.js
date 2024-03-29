@@ -1,6 +1,6 @@
 import { cardTemplate } from "../templates/cardTemplate.js";
 import { setFilters } from "../templates/setFilters.js";
-import { setTags } from "../templates/setTags.js";
+import { displayTags } from "../templates/displayTags.js";
 import { updateRecipeNumber } from "../main.js";
 
 // Implémentation de la recherche avec boucles natives (for, while, ...)
@@ -60,7 +60,7 @@ export function searchRecipes(recipes, newList) {
             // On relance les fonctions de génération
             cardTemplate(newList);
             setFilters(newList);
-            setTags(newList);
+            displayTags(newList);
             updateRecipeNumber(newList);
         } else {
             console.log("L'input n'est pas assez long")
@@ -74,7 +74,7 @@ export function searchRecipes(recipes, newList) {
             // On relance les fonctions de génération
             cardTemplate(recipes);
             setFilters(recipes);
-            setTags(recipes);
+            displayTags(recipes);
             updateRecipeNumber(recipes);
         }
     });

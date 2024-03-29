@@ -10,7 +10,7 @@
         @apply shadow-2xl;
     }
     .btn_filter {
-        @apply rounded-xl bg-white w-48 p-4 flex items-center justify-between transition-shadow duration-300 ease-in-out;
+        @apply rounded-xl bg-white w-48 p-4 flex items-center justify-between transition-shadow duration-300 ease-in-out cursor-pointer;
     }
     .btn_filter:hover {
         @apply shadow;
@@ -52,6 +52,12 @@
 
     .chosen_option{
         @apply bg-yellow1 px-4 py-2 text-black1 text-sm flex items-center justify-between duration-200;
+    }
+    .chosen_option:hover{
+        @apply font-bold;
+    }
+    .chosen_option:hover i{
+        @apply !flex;
     }
 }
 
