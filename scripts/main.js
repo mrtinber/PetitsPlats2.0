@@ -41,14 +41,14 @@ for (let i = 0; i < btnFilter.length; i++) {
             closeAllDropdowns()
             btnDropdown[i].classList.remove("max-h-0");
             btnDropdown[i].classList.add("max-h-80");
-            console.log(`le bouton numéro ${i} on ouvre`, btnDropdown[i])
+            // console.log(`le bouton numéro ${i} on ouvre`, btnDropdown[i])
             btnFilter[i].classList.add("rounded-b-none");
             btnArrow[i].style.rotate = "-180deg";
         } else {
             closeAllDropdowns()
             btnDropdown[i].classList.add("max-h-0");
             btnDropdown[i].classList.remove("max-h-80");
-            console.log(`le bouton numéro ${i} on ferme`, btnDropdown[i])
+            // console.log(`le bouton numéro ${i} on ferme`, btnDropdown[i])
             btnFilter[i].classList.remove("rounded-b-none");
             btnArrow[i].style.rotate = "0deg";
         }
@@ -78,7 +78,7 @@ inputs.forEach(input => {
 
 
 export function filterUpdate(recipes, tagList) {
-    console.log("filterupdate entry list:", recipes);
+    // console.log("filterupdate entry list:", recipes);
     // Reset newList à chaque nouvelle mise à jour
     newList = [];
 
@@ -128,8 +128,8 @@ export function filterUpdate(recipes, tagList) {
     }
 
     // Mettre à jour l'affichage des recettes avec newList
-    console.log("filterupdate end la liste qui est entrée: ", recipes)
-    console.log("filterupdate end newlist = ", newList);
+    // console.log("filterupdate end la liste qui est entrée: ", recipes)
+    // console.log("filterupdate end newlist = ", newList);
     recipeContainer.innerHTML = "";
     cardTemplate(newList);
     updateRecipeNumber(newList);

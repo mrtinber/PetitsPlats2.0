@@ -67,9 +67,9 @@ export function displayTags (){
                     tagList.splice(index, 1);
                 }
                 
-                console.log("je supprime un tag, voici newlist avant maj:", newList)
                 // Après avoir supprimé un nouveau tag
-                filterUpdate(newList, tagList);
+                // console.log("je supprime un tag, voici newlist avant maj:", newList)
+                filterUpdate(recipes, tagList);
 
                 let optionList = document.querySelectorAll(".filter_option");
                 optionList.forEach(li => {
@@ -80,8 +80,11 @@ export function displayTags (){
                 
                 // Affiche toutes les recettes après suppression de tous les filtres
                 if (tagList.length === 0){
+                    recipeContainer.innerHTML = "";
                     cardTemplate(recipes);
                     updateRecipeNumber(recipes);
+
+                    // Effacer le conteneur car la dernière recette reste? 
                     let optionList = document.querySelectorAll(".filter_option");
                     optionList.forEach(li => {
                         li.remove();
