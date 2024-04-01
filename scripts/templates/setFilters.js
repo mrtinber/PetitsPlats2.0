@@ -15,7 +15,6 @@ export function setFilters(recipes) {
             allIngredients.push(normalizedIngredient);
         });
     });
-    console.log("les ingrédients dans la liste", allIngredients)
 
     // Eviter les répétitions dans la liste 
     const uniqueIngredientsSet = new Set(allIngredients);

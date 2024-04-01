@@ -1,5 +1,5 @@
 import { filterUpdate, newList, updateRecipeNumber } from "../main.js";
-import { searchRecipes } from "../utils/searchRecipes.js";
+import { performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
 import { cardTemplate } from "./cardTemplate.js";
 import recipes from "../data/recipes.js";
 import { setFilters } from "./setFilters.js";
@@ -9,10 +9,9 @@ const tagBar = document.querySelector(".tag_bar");
 let tagList = [];
 
 export function displayTags (){
-
-    let optionList = document.querySelectorAll(".filter_option");
-    // On crée la liste vide des éléments HTML de tags
     
+    let optionList = document.querySelectorAll(".filter_option");
+
     // On parcourt chaque option des listes déroulantes et on écoute l'événement "clic"
     optionList.forEach(option => {
         option.addEventListener("click", () =>{
@@ -68,7 +67,6 @@ export function displayTags (){
                 }
                 
                 // Après avoir supprimé un nouveau tag
-                // console.log("je supprime un tag, voici newlist avant maj:", newList)
                 filterUpdate(recipes, tagList);
 
                 let optionList = document.querySelectorAll(".filter_option");
@@ -80,24 +78,24 @@ export function displayTags (){
                 
                 // Affiche toutes les recettes après suppression de tous les filtres
                 if (tagList.length === 0){
-                    recipeContainer.innerHTML = "";
-                    cardTemplate(recipes);
-                    updateRecipeNumber(recipes);
-
-                    // Effacer le conteneur car la dernière recette reste? 
-                    let optionList = document.querySelectorAll(".filter_option");
-                    optionList.forEach(li => {
-                        li.remove();
-                    });
-                    setFilters(recipes);
-                    displayTags();
-                    // Si on vide la liste de tags, on veut qu'il prenne quand même en compte l'input du champ principal 
-                    // Il faut récupérer ce qu'il y a d'écrit dans l'input et faire le tri selon cet input
-                    // const inputValue = mainSearchbar.value.toLowerCase();
-                    // if (inputValue != ""){
-                        // afficher les recettes 
-                    // }
-                    // searchRecipes(recipes, newList);
+                    const mainSearchbar = document.querySelector("nav input");
+                    const inputValue = mainSearchbar.value.toLowerCase();
+                    if (inputValue != ""){
+                        let newList = []
+                        performSearch(recipes, inputValue, newList);
+                        resetAndUpdateDisplay(newList);
+                    } else {
+                        recipeContainer.innerHTML = "";
+                        cardTemplate(recipes);
+                        updateRecipeNumber(recipes);
+    
+                        let optionList = document.querySelectorAll(".filter_option");
+                        optionList.forEach(li => {
+                            li.remove();
+                        });
+                        setFilters(recipes);
+                        displayTags();
+                    }
                 }
             };
 
@@ -116,17 +114,6 @@ export function displayTags (){
         
             setFilters(newList);
             displayTags();
-                //         function addTagAndUpdateFilters(newList) {
-                // Mettre à jour les recettes affichées et récupérer la nouvelle liste newList
-    //             newList = filterUpdate(recipes, tagList);
-    //             // Mettre à jour les options disponibles dans les filtres
-    //             setFilters(newList);
-    //             // Mettre à jour les tags
-    //             setTags(newList);
-    //         }
-
-    //         // Après avoir ajouté un nouveau tag, appelez addTagAndUpdateFilters
-    //         addTagAndUpdateFilters(newList);
         });
     });
 }
