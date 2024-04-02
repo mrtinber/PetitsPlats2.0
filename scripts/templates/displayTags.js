@@ -1,8 +1,9 @@
-import { updateAfterTag, newList, newListAfterUpdate, updateRecipeNumber } from "../main.js";
+import { newList } from "../main.js";
 import { newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
 import { cardTemplate } from "./cardTemplate.js";
 import recipes from "../data/recipes.js";
 import { setFilters } from "./setFilters.js";
+import { updateAfterTag, updateRecipeNumber, newListAfterUpdate } from "../utils/updateAfterTag.js";
 
 const recipeContainer = document.querySelector(".container_recipes");
 const tagBar = document.querySelector(".tag_bar");
@@ -79,7 +80,7 @@ export function displayTags() {
                     updateFilterList(newListAfterUpdate);
                 } else {
                     updateAfterTag(recipes, tagList);
-                    updateFilterList(newList);
+                    updateFilterList(newListAfterUpdate);
                 }
 
                 // Affiche toutes les recettes après suppression de tous les filtres
@@ -110,11 +111,11 @@ export function displayTags() {
             if (newListAfterSearch != 0) {
                 updateAfterTag(newListAfterSearch, tagList);
                 newListAfterTag = newList;
+                updateFilterList(newListAfterUpdate);
             } else {
                 updateAfterTag(recipes, tagList);
+                updateFilterList(newListAfterUpdate);
             }
-
-            updateFilterList(newList);
         });
     });
     // Stocker la nouvelle liste dans une variable plus claire

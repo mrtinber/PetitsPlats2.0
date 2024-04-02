@@ -1,8 +1,7 @@
 import { cardTemplate } from "../templates/cardTemplate.js";
 import { setFilters } from "../templates/setFilters.js";
 import { displayTags, newListAfterTag, tagList } from "../templates/displayTags.js";
-import { newListAfterUpdate, updateRecipeNumber } from "../main.js";
-import { updateAfterTag } from "../main.js";
+import { updateAfterTag, updateRecipeNumber, newListAfterUpdate } from "./updateAfterTag.js";
 
 // Implémentation de la recherche avec boucles natives (for, while, ...)
 const mainSearchbar = document.querySelector("nav input");
@@ -15,8 +14,7 @@ export function searchRecipes(recipes, newList) {
         newList = [];
 
         if (inputValue.length >= 3 && newListAfterTag.length > 0) {
-            console.log("search 1")
-            performSearch(newListAfterTag, inputValue);
+            performSearch(newListAfterUpdate, inputValue);
             resetAndUpdateDisplay(newListAfterSearch);
             return newListAfterSearch
         } else if (inputValue.length < 3 && newListAfterTag.length > 0){
@@ -37,12 +35,10 @@ export function performSearch(recipes, inputValue){
         const foundInIngredients = recipe.ingredients.some(element => element.ingredient.toLowerCase().includes(inputValue));
         return foundInName || foundInDescription || foundInIngredients;
     });
-    console.log("newlist ici", newList)
     newListAfterSearch = newList
 }
 
 export function resetAndUpdateDisplay(list){
-    console.log("reset and update display")
     // On vide le conteneur principal et aussi les filtres
     recipeContainer.innerHTML = "";
     let optionList = document.querySelectorAll(".filter_option");

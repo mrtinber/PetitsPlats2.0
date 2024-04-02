@@ -1,6 +1,12 @@
+import { cardTemplate } from "../templates/cardTemplate.js";
+
+const recipeContainer = document.querySelector(".container_recipes");
+
+export let newListAfterUpdate;
+
 export function updateAfterTag(recipes, tagList) {
     // Reset newList à chaque nouvelle mise à jour
-    newList = [];
+    let newList = [];
 
     // On va parcourir chaque recette pour voir s'il y a des correspondances avec tous les tags
     for (let i = 0; i < recipes.length; i++) {
@@ -52,6 +58,7 @@ export function updateAfterTag(recipes, tagList) {
     cardTemplate(newList);
     updateRecipeNumber(newList);
     newListAfterUpdate = newList;
+    return newListAfterUpdate;
 }
 
 export function updateRecipeNumber (newList){
