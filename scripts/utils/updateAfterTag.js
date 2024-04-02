@@ -1,5 +1,5 @@
 // // Mise à jour de la liste de recettes disponibles
-// export function filterUpdate(recipes, tagList) {
+// export function updateAfterTag(recipes, tagList) {
 //     let tagText = [];
 //     tagList.forEach(element => {
 //         const textElement = element.innerText.toLowerCase();

@@ -1,4 +1,4 @@
-import { filterUpdate, newList, newListAfterUpdate, updateRecipeNumber } from "../main.js";
+import { updateAfterTag, newList, newListAfterUpdate, updateRecipeNumber } from "../main.js";
 import { newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
 import { cardTemplate } from "./cardTemplate.js";
 import recipes from "../data/recipes.js";
@@ -71,11 +71,13 @@ export function displayTags (){
 
                 // Après avoir supprimé un tag
                 if (newListAfterSearch != 0){
+                    console.log("hello")
+                    console.log("hello la liste", newListAfterSearch)
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
                     let newList = [];
                     performSearch(recipes, inputValue, newList);
-                    filterUpdate(newList, tagList);
+                    updateAfterTag(newListAfterSearch, tagList);
                     let optionList = document.querySelectorAll(".filter_option");
                     optionList.forEach(li => {
                         li.remove();
@@ -83,7 +85,7 @@ export function displayTags (){
                     setFilters(newListAfterUpdate);
                     displayTags();
                 } else {
-                    filterUpdate(recipes, tagList);
+                    updateAfterTag(recipes, tagList);
                     let optionList = document.querySelectorAll(".filter_option");
                     optionList.forEach(li => {
                         li.remove();
@@ -99,12 +101,12 @@ export function displayTags (){
                     if (inputValue != ""){
                         let newList = []
                         performSearch(recipes, inputValue, newList);
-                        resetAndUpdateDisplay(newList);
+                        resetAndUpdateDisplay(newListAfterSearch);
                         let optionList = document.querySelectorAll(".filter_option");
                         optionList.forEach(li => {
                             li.remove();
                         });
-                        setFilters(newList);
+                        setFilters(newListAfterSearch);
                         displayTags();
                         // Reset de la liste aftertag pour afficher toutes les recettes si suppression du champ
                         newListAfterTag = []
@@ -129,10 +131,10 @@ export function displayTags (){
             
             // Après avoir ajouté un nouveau tag
             if (newListAfterSearch != 0){
-                filterUpdate(newListAfterSearch, tagList);
+                updateAfterTag(newListAfterSearch, tagList);
                 newListAfterTag = newList;
             } else {
-                filterUpdate(recipes, tagList);
+                updateAfterTag(recipes, tagList);
             }
 
             let optionList = document.querySelectorAll(".filter_option");

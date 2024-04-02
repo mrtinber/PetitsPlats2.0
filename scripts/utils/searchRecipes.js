@@ -2,7 +2,7 @@ import { cardTemplate } from "../templates/cardTemplate.js";
 import { setFilters } from "../templates/setFilters.js";
 import { displayTags, newListAfterTag, tagList } from "../templates/displayTags.js";
 import { newListAfterUpdate, updateRecipeNumber } from "../main.js";
-import { filterUpdate } from "../main.js";
+import { updateAfterTag } from "../main.js";
 
 // Implémentation de la recherche avec boucles natives (for, while, ...)
 const mainSearchbar = document.querySelector("nav input");
@@ -15,10 +15,12 @@ export function searchRecipes(recipes, newList) {
         newList = [];
 
         if (inputValue.length >= 3 && newListAfterTag.length > 0) {
-            performSearch(newListAfterTag, inputValue, newList);
-            resetAndUpdateDisplay(newList);
+            console.log("search 1")
+            performSearch(newListAfterTag, inputValue);
+            resetAndUpdateDisplay(newListAfterSearch);
+            return newListAfterSearch
         } else if (inputValue.length < 3 && newListAfterTag.length > 0){
-            filterUpdate(recipes, tagList);
+            updateAfterTag(recipes, tagList);
             resetAndUpdateDisplay(newListAfterUpdate);
         } else {
             resetAndUpdateDisplay(recipes);
@@ -28,36 +30,19 @@ export function searchRecipes(recipes, newList) {
     });
 }
 
-export function performSearch(recipes, inputValue, newList){
-
-    recipes.forEach(recipe => {
-        let foundInName = false;
-        let foundInDescription = false;
-        let foundInIngredients = false;
-
-        // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
-        if (recipe.name.toLowerCase().includes(inputValue)) {
-            foundInName = true;
-        }
-
-        if (recipe.description.toLowerCase().includes(inputValue)) {
-            foundInDescription = true;
-        }
-
-        recipe.ingredients.forEach(element => {
-            if (element.ingredient.toLowerCase().includes(inputValue)) {
-                foundInIngredients = true;
-            }
-        });  
-
-        // Affichage de la recette si une correspondance est trouvée dans au moins l'une des parties de la recette
-        if (foundInName || foundInDescription || foundInIngredients) {
-            newList.push(recipe);
-        }
-    })
+export function performSearch(recipes, inputValue){
+    let newList = recipes.filter(recipe => {
+        const foundInName = recipe.name.toLowerCase().includes(inputValue);
+        const foundInDescription = recipe.description.toLowerCase().includes(inputValue);
+        const foundInIngredients = recipe.ingredients.some(element => element.ingredient.toLowerCase().includes(inputValue));
+        return foundInName || foundInDescription || foundInIngredients;
+    });
+    console.log("newlist ici", newList)
+    newListAfterSearch = newList
 }
 
 export function resetAndUpdateDisplay(list){
+    console.log("reset and update display")
     // On vide le conteneur principal et aussi les filtres
     recipeContainer.innerHTML = "";
     let optionList = document.querySelectorAll(".filter_option");

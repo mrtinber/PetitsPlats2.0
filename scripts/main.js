@@ -76,7 +76,7 @@ inputs.forEach(input => {
 
 export let newListAfterUpdate;
 
-export function filterUpdate(recipes, tagList) {
+export function updateAfterTag(recipes, tagList) {
     // Reset newList à chaque nouvelle mise à jour
     newList = [];
 
