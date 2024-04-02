@@ -6,18 +6,18 @@ import { setFilters } from "./setFilters.js";
 
 const recipeContainer = document.querySelector(".container_recipes");
 const tagBar = document.querySelector(".tag_bar");
-export let tagList = [];
 
+export let tagList = [];
 export let newListAfterTag = [];
 
-export function displayTags (){
+export function displayTags() {
 
     let optionList = document.querySelectorAll(".filter_option");
     newListAfterTag = [];
-    
+
     // On parcourt chaque option des listes déroulantes et on écoute l'événement "clic"
     optionList.forEach(option => {
-        option.addEventListener("click", () =>{
+        option.addEventListener("click", () => {
 
             // Ajout du tag sous la barre de filtres
             const newTag = document.createElement("div");
@@ -30,7 +30,7 @@ export function displayTags (){
 
             // On ajoute ce nouvel élément tag à la liste tagList
             tagList.push(newTag);
-            
+
             // Ajout du tag dans la liste déroulante correspondante
             const parentClassName = option.parentNode.className;
             let dropdownFilter;
@@ -62,7 +62,7 @@ export function displayTags (){
                 newTag.remove();
                 newListTag.remove();
                 recipeContainer.innerHTML = "";
-                
+
                 // Retire l'élément supprimé de la liste tagList
                 const index = tagList.indexOf(newTag);
                 if (index !== -1) {
@@ -70,57 +70,34 @@ export function displayTags (){
                 }
 
                 // Après avoir supprimé un tag
-                if (newListAfterSearch != 0){
-                    console.log("hello")
-                    console.log("hello la liste", newListAfterSearch)
+                if (newListAfterSearch != 0) {
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
                     let newList = [];
                     performSearch(recipes, inputValue, newList);
                     updateAfterTag(newListAfterSearch, tagList);
-                    let optionList = document.querySelectorAll(".filter_option");
-                    optionList.forEach(li => {
-                        li.remove();
-                    });
-                    setFilters(newListAfterUpdate);
-                    displayTags();
+                    updateFilterList(newListAfterUpdate);
                 } else {
                     updateAfterTag(recipes, tagList);
-                    let optionList = document.querySelectorAll(".filter_option");
-                    optionList.forEach(li => {
-                        li.remove();
-                    });
-                    setFilters(newList);
-                    displayTags();
+                    updateFilterList(newList);
                 }
 
                 // Affiche toutes les recettes après suppression de tous les filtres
-                if (tagList.length === 0){
+                if (tagList.length === 0) {
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
-                    if (inputValue != ""){
+                    if (inputValue != "") {
                         let newList = []
                         performSearch(recipes, inputValue, newList);
                         resetAndUpdateDisplay(newListAfterSearch);
-                        let optionList = document.querySelectorAll(".filter_option");
-                        optionList.forEach(li => {
-                            li.remove();
-                        });
-                        setFilters(newListAfterSearch);
-                        displayTags();
+                        updateFilterList(newListAfterSearch);
                         // Reset de la liste aftertag pour afficher toutes les recettes si suppression du champ
                         newListAfterTag = []
                     } else {
                         recipeContainer.innerHTML = "";
                         cardTemplate(recipes);
                         updateRecipeNumber(recipes);
-    
-                        let optionList = document.querySelectorAll(".filter_option");
-                        optionList.forEach(li => {
-                            li.remove();
-                        });
-                        setFilters(recipes);
-                        displayTags();
+                        updateFilterList(recipes);
                     }
                 }
             };
@@ -128,24 +105,30 @@ export function displayTags (){
             // Ajout de l'écouteur d'événement de suppression aux deux boutons de suppression
             removeBtnTag.addEventListener("click", removeTags);
             removeBtnList.addEventListener("click", removeTags);
-            
+
             // Après avoir ajouté un nouveau tag
-            if (newListAfterSearch != 0){
+            if (newListAfterSearch != 0) {
                 updateAfterTag(newListAfterSearch, tagList);
                 newListAfterTag = newList;
             } else {
                 updateAfterTag(recipes, tagList);
             }
 
-            let optionList = document.querySelectorAll(".filter_option");
-            optionList.forEach(li => {
-                li.remove();
-            });
-        
-            setFilters(newList);
-            displayTags();
+            updateFilterList(newList);
         });
     });
     // Stocker la nouvelle liste dans une variable plus claire
     newListAfterTag = newList;
+}
+
+// Fonction qui vide la liste d'options des filtres pour la remplacer par une nouvelle, mise à jour par la recherche
+function updateFilterList(list) {
+    let optionList = document.querySelectorAll(".filter_option");
+
+    optionList.forEach(li => {
+        li.remove();
+    });
+
+    setFilters(list);
+    displayTags();
 }

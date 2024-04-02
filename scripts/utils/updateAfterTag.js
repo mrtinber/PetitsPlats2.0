@@ -1,62 +1,66 @@
-// // Mise à jour de la liste de recettes disponibles
-// export function updateAfterTag(recipes, tagList) {
-//     let tagText = [];
-//     tagList.forEach(element => {
-//         const textElement = element.innerText.toLowerCase();
-//         tagText.push(textElement);
-//     });
+export function updateAfterTag(recipes, tagList) {
+    // Reset newList à chaque nouvelle mise à jour
+    newList = [];
 
-//     console.log("tagtext", tagText);
-//     console.log("taglist", tagList);
-//     // Reset newList à chaque nouvelle mise à jour
-//     newList = [];
+    // On va parcourir chaque recette pour voir s'il y a des correspondances avec tous les tags
+    for (let i = 0; i < recipes.length; i++) {
+        let foundAllTags = true; // Initialisation à true pour indiquer que tous les tags sont trouvés pour cette recette
 
-//     for(let i=0; i < recipes.length; i++) {
-//         let foundInIngredients = false;
-//         let foundInAppliances = false;
-//         let foundInUtensils = false; 
+        // Vérification pour chaque tag de la liste
+        for (let t = 0; t < tagList.length; t++) {
+            const tagText = tagList[t].querySelector("p").innerText.toLowerCase();
+            let foundTag = false; // Initialisation à false pour indiquer que le tag n'est pas trouvé par défaut
 
-//         for (let t = 0; t < tagList.length; t++) {
-//             const tagText = tagList[t].querySelector("p").innerText.toLowerCase();
-//             // Utilisation d'une boucle pour vérifier chaque caractère des ingrédients de la recette
-//             for (let j = 0; j < recipes[i].ingredients.length; j++) {
-//                 const itemIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
-//                 for (let k = 0; k <= itemIngredients.length - tagText.length; k++) {
-//                     if (itemIngredients.substring(k, k + tagText.length).toLowerCase() === tagText) {
-//                         foundInIngredients = true;
-//                         break;
-//                     }
-//                 }
-//             } 
+            // Vérification des ingrédients
+            for (let j = 0; j < recipes[i].ingredients.length; j++) {
+                const itemIngredient = recipes[i].ingredients[j].ingredient.toLowerCase();
+                if (itemIngredient.includes(tagText)) {
+                    foundTag = true;
+                    break; // Si le tag est trouvé dans les ingrédients, on arrête la boucle
+                }
+            }
 
-//             // Utilisation d'une boucle pour vérifier chaque caractère de les appareils de la recette
-//             for (let j = 0; j <= recipes[i].appliance.length - tagText.length; j++) {
-//                     if (recipes[i].appliance.substring(j, j + tagText.length).toLowerCase() === tagText) {
-//                         foundInAppliances = true;
-//                         break;
-//                     }
-//             }
+            // Vérification des appareils
+            if (!foundTag && recipes[i].appliance.toLowerCase().includes(tagText)) {
+                foundTag = true;
+            }
 
-//             // Utilisation d'une boucle pour vérifier chaque caractère des ustensiles de la recette
-//             for (let j = 0; j < recipes[i].ustensils.length; j++) {
-//                 const itemUtensils = recipes[i].ustensils[j].toLowerCase();
-//                 for (let k = 0; k <= itemUtensils.length - tagText.length; k++) {
-//                     if (itemUtensils.substring(k, k + tagText.length).toLowerCase() === tagText) {
-//                         foundInUtensils = true;
-//                         break;
-//                     }
-//                 }
-//             } 
+            // Vérification des ustensiles
+            for (let j = 0; j < recipes[i].ustensils.length; j++) {
+                const itemUtensil = recipes[i].ustensils[j].toLowerCase();
+                if (itemUtensil.includes(tagText)) {
+                    foundTag = true;
+                    break; // Si le tag est trouvé dans les ustensiles, on arrête la boucle
+                }
+            }
 
-//             if (foundInIngredients || foundInAppliances || foundInUtensils) {
-//                 if (!newList.includes(recipes[i])){
-//                     newList.push(recipes[i]);
-//                 }
-//             }  
-//         }
-//     }
-//     // Mettre à jour l'affichage des recettes
-//     recipeContainer.innerHTML = "";
-//     cardTemplate(newList);
-//     console.log("newlist", newList);
-// }
+            // Si le tag n'est pas trouvé pour cette recette, on met foundAllTags à false
+            if (!foundTag) {
+                foundAllTags = false;
+                break; // Pas besoin de vérifier les autres tags pour cette recette
+            }
+        }
+
+        // Si tous les tags sont trouvés pour cette recette, on l'ajoute à la liste newList
+        if (foundAllTags) {
+            newList.push(recipes[i]);
+        }
+    }
+
+    // Mettre à jour l'affichage des recettes avec newList
+    recipeContainer.innerHTML = "";
+    cardTemplate(newList);
+    updateRecipeNumber(newList);
+    newListAfterUpdate = newList;
+}
+
+export function updateRecipeNumber (newList){
+    const nbRecipes = document.getElementById("nbRecipes");
+    const number = newList.length
+
+    if (number >= 2){
+        nbRecipes.innerText = `${number} recettes`
+    } else {
+        nbRecipes.innerText = `${number} recette`
+    }
+}
