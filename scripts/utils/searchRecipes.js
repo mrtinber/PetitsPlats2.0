@@ -69,10 +69,6 @@ export function performSearch(recipes, inputValue, newList){
             newList.push(recipes[i]);
         }
     }
-
-    if (newList.length === 0){
-        console.log("il faut afficher un message là")
-    }
 }
 
 export function resetAndUpdateDisplay(list){
@@ -84,9 +80,17 @@ export function resetAndUpdateDisplay(list){
         li.remove();
     });
 
-    // On relance les fonctions de génération
-    cardTemplate(list);
-    setFilters(list);
-    displayTags(list);
-    updateRecipeNumber(list);
+    if (list.length === 0){
+        const inputValue = mainSearchbar.value.trim();
+        const noMatchMessage = document.createElement("div");
+        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${inputValue}"`
+        recipeContainer.appendChild(noMatchMessage);
+        updateRecipeNumber(list);
+    } else {
+        // On relance les fonctions de génération
+        cardTemplate(list);
+        setFilters(list);
+        displayTags();
+        updateRecipeNumber(list);
+    }
 }
