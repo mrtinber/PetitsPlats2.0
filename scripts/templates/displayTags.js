@@ -51,7 +51,7 @@ export function displayTags() {
             newListTag.innerHTML = `
             <p>${option.innerText}</p>
             <i class="fa-solid fa-circle-xmark cursor-pointer !hidden duration-200 hover:scale-125"></i>
-            `
+            `;
             dropdownFilter.insertBefore(newListTag, filterListElement);
 
             // Ajout de l'écouteur d'événement de suppression à ces tags
@@ -88,12 +88,12 @@ export function displayTags() {
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
                     if (inputValue != "") {
-                        let newList = []
+                        let newList = [];
                         performSearch(recipes, inputValue, newList);
                         resetAndUpdateDisplay(newListAfterSearch);
                         updateFilterList(newListAfterSearch);
                         // Reset de la liste aftertag pour afficher toutes les recettes si suppression du champ
-                        newListAfterTag = []
+                        newListAfterTag = [];
                     } else {
                         recipeContainer.innerHTML = "";
                         cardTemplate(recipes);
@@ -101,7 +101,7 @@ export function displayTags() {
                         updateFilterList(recipes);
                     }
                 }
-            };
+            }
 
             // Ajout de l'écouteur d'événement de suppression aux deux boutons de suppression
             removeBtnTag.addEventListener("click", removeTags);

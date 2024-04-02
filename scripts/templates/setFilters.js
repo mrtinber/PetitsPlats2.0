@@ -20,11 +20,11 @@ export function setFilters(recipes) {
     let uniqueIngredientsArray = [...uniqueIngredientsSet];
 
     // Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
-    const filterListIngredients = document.querySelector(".filter_list_ingredients")
+    const filterListIngredients = document.querySelector(".filter_list_ingredients");
 
     uniqueIngredientsArray.forEach(element => {
-        createFilters(filterListIngredients, element)
-    })
+        createFilters(filterListIngredients, element);
+    });
 
     // Retrouver tous les appareils disponibles dans les recettes
     let allAppliances = [];
@@ -41,10 +41,10 @@ export function setFilters(recipes) {
     const uniqueAppliancesArray = [...uniqueAppliancesSet];
 
     // Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
-    const filterListAppliances = document.querySelector(".filter_list_appliances")
+    const filterListAppliances = document.querySelector(".filter_list_appliances");
 
     uniqueAppliancesArray.forEach(element => {
-        createFilters(filterListAppliances, element)
+        createFilters(filterListAppliances, element);
     });
 
     // Retrouver tous les ustensiles disponibles dans les recettes
@@ -66,10 +66,10 @@ export function setFilters(recipes) {
     const uniqueUtensilsArray = [...uniqueUtensilsSet];
 
     // Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
-    const filterListUtensils = document.querySelector(".filter_list_utensils")
+    const filterListUtensils = document.querySelector(".filter_list_utensils");
 
     uniqueUtensilsArray.forEach(element => {
-        createFilters(filterListUtensils, element)
+        createFilters(filterListUtensils, element);
     });
 
     const inputs = document.querySelectorAll(".dropdown_filter input");
@@ -87,7 +87,7 @@ export function setFilters(recipes) {
             const lowercaseElement = element.toLowerCase();
             // Pour chaque élément on vérifie s'il contient la valeur de l'input, puis on crée l'élément
             if (lowercaseElement.includes(inputValue)) {
-                createFilters(filterListIngredients, element)
+                createFilters(filterListIngredients, element);
             }
         });
 
@@ -104,7 +104,7 @@ export function setFilters(recipes) {
         uniqueAppliancesArray.forEach(element => {
             const lowercaseElement = element.toLowerCase();
             if (lowercaseElement.includes(inputValue)) {
-                createFilters(filterListAppliances, element)
+                createFilters(filterListAppliances, element);
             }
         });
 
@@ -121,12 +121,12 @@ export function setFilters(recipes) {
         uniqueUtensilsArray.forEach(element => {
             const lowercaseElement = element.toLowerCase();
             if (lowercaseElement.includes(inputValue)) {
-                createFilters(filterListUtensils, element)
+                createFilters(filterListUtensils, element);
             }
         });
 
         displayTags(recipes);
-    })
+    });
 }
 
 // Fonction commune pour créer la liste d'options et l'attacher au filtre correspondant

@@ -16,7 +16,7 @@ export function searchRecipes(recipes, newList) {
         if (inputValue.length >= 3 && newListAfterTag.length > 0) {
             performSearch(newListAfterUpdate, inputValue);
             resetAndUpdateDisplay(newListAfterSearch);
-            return newListAfterSearch
+            return newListAfterSearch;
         } else if (inputValue.length < 3 && newListAfterTag.length > 0){
             updateAfterTag(recipes, tagList);
             resetAndUpdateDisplay(newListAfterUpdate);
@@ -35,7 +35,7 @@ export function performSearch(recipes, inputValue){
         const foundInIngredients = recipe.ingredients.some(element => element.ingredient.toLowerCase().includes(inputValue));
         return foundInName || foundInDescription || foundInIngredients;
     });
-    newListAfterSearch = newList
+    newListAfterSearch = newList;
 }
 
 export function resetAndUpdateDisplay(list){
@@ -49,7 +49,7 @@ export function resetAndUpdateDisplay(list){
     if (list.length === 0){
         const inputValue = mainSearchbar.value.trim();
         const noMatchMessage = document.createElement("div");
-        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${inputValue}"`
+        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${inputValue}"`;
         recipeContainer.appendChild(noMatchMessage);
         updateRecipeNumber(list);
     } else {

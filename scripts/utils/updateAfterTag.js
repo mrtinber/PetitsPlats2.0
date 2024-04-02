@@ -63,11 +63,11 @@ export function updateAfterTag(recipes, tagList) {
 
 export function updateRecipeNumber (newList){
     const nbRecipes = document.getElementById("nbRecipes");
-    const number = newList.length
+    const number = newList.length;
 
     if (number >= 2){
-        nbRecipes.innerText = `${number} recettes`
+        nbRecipes.innerText = `${number} recettes`;
     } else {
-        nbRecipes.innerText = `${number} recette`
+        nbRecipes.innerText = `${number} recette`;
     }
 }

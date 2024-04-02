@@ -6,9 +6,6 @@ import { closeAllDropdowns } from "./utils/closeAllDropdowns.js";
 import { searchRecipes } from "./utils/searchRecipes.js";
 import { updateRecipeNumber } from "./utils/updateAfterTag.js";
 
-
-// 4 variables: searchglobal; tagutensil; tagapparel; tagingredient
-
 // Création de la liste qui accueillera les recettes correspondantes
 export let newList = recipes;
 
@@ -35,13 +32,13 @@ const btnArrow = document.querySelectorAll(".fa-chevron-down");
 for (let i = 0; i < btnFilter.length; i++) {
     btnFilter[i].addEventListener("click", () => {
         if (!btnDropdown[i].classList.contains("max-h-80")) {
-            closeAllDropdowns()
+            closeAllDropdowns();
             btnDropdown[i].classList.remove("max-h-0");
             btnDropdown[i].classList.add("max-h-80");
             btnFilter[i].classList.add("rounded-b-none");
             btnArrow[i].style.rotate = "-180deg";
         } else {
-            closeAllDropdowns()
+            closeAllDropdowns();
             btnDropdown[i].classList.add("max-h-0");
             btnDropdown[i].classList.remove("max-h-80");
             btnFilter[i].classList.remove("rounded-b-none");
