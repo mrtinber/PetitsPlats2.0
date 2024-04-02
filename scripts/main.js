@@ -74,8 +74,10 @@ inputs.forEach(input => {
     });
 });
 
+export let newListAfterUpdate;
 
 export function filterUpdate(recipes, tagList) {
+    console.log("filter update");
     // Reset newList à chaque nouvelle mise à jour
     newList = [];
 
@@ -128,7 +130,7 @@ export function filterUpdate(recipes, tagList) {
     recipeContainer.innerHTML = "";
     cardTemplate(newList);
     updateRecipeNumber(newList);
-    return newList;
+    newListAfterUpdate = newList;
 }
 
 export function updateRecipeNumber (newList){

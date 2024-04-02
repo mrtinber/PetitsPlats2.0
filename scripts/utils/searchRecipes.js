@@ -1,30 +1,40 @@
 import { cardTemplate } from "../templates/cardTemplate.js";
 import { setFilters } from "../templates/setFilters.js";
-import { displayTags } from "../templates/displayTags.js";
-import { updateRecipeNumber } from "../main.js";
+import { displayTags, newListAfterTag, tagList } from "../templates/displayTags.js";
+import { newListAfterUpdate, updateRecipeNumber } from "../main.js";
+import { filterUpdate } from "../main.js";
 
 // Implémentation de la recherche avec boucles natives (for, while, ...)
 const mainSearchbar = document.querySelector("nav input");
 const recipeContainer = document.querySelector(".container_recipes");
+export let newListAfterSearch = [];
 
 export function searchRecipes(recipes, newList) {
+    console.log("search recipes");
     mainSearchbar.addEventListener("input", () => {
         const inputValue = mainSearchbar.value.toLowerCase();
         console.log(inputValue);
         newList = [];
 
-        if (inputValue.length >= 3) {
-            performSearch(recipes, inputValue, newList);
+        if (inputValue.length >= 3 && newListAfterTag.length > 0) {
+            console.log("search 1");
+            performSearch(newListAfterTag, inputValue, newList);
             resetAndUpdateDisplay(newList);
+        } else if (inputValue.length < 3 && newListAfterTag.length > 0){
+            filterUpdate(recipes, tagList);
+            resetAndUpdateDisplay(newListAfterUpdate);
         } else {
+            console.log("retour à zéro")
             resetAndUpdateDisplay(recipes);
         }
+        
+        newListAfterSearch = newList;
     });
 }
 
 export function performSearch(recipes, inputValue, newList){
     for (let i = 0; i < recipes.length; i++) {
-
+        console.log("perform search");
         let foundInName = false;
         let foundInDescription = false;
         let foundInIngredients = false;
@@ -59,19 +69,24 @@ export function performSearch(recipes, inputValue, newList){
             newList.push(recipes[i]);
         }
     }
+
+    if (newList.length === 0){
+        console.log("il faut afficher un message là")
+    }
 }
 
 export function resetAndUpdateDisplay(list){
-                // On vide le conteneur principal et aussi les filtres
-                recipeContainer.innerHTML = "";
-                let optionList = document.querySelectorAll(".filter_option");
-                optionList.forEach(li => {
-                    li.remove();
-                });
-    
-                // On relance les fonctions de génération
-                cardTemplate(list);
-                setFilters(list);
-                displayTags(list);
-                updateRecipeNumber(list);
+    console.log("reset and update display");
+    // On vide le conteneur principal et aussi les filtres
+    recipeContainer.innerHTML = "";
+    let optionList = document.querySelectorAll(".filter_option");
+    optionList.forEach(li => {
+        li.remove();
+    });
+
+    // On relance les fonctions de génération
+    cardTemplate(list);
+    setFilters(list);
+    displayTags(list);
+    updateRecipeNumber(list);
 }
