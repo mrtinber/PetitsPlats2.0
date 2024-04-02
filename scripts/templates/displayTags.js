@@ -69,18 +69,10 @@ export function displayTags (){
                     tagList.splice(index, 1);
                 }
 
-                ///////////// A verifier
-                // Les filtres sont bien mis à jour correctement : notamment après avoir tapé un mot
-                // --> tape "choco", sélectionne "oeuf" et d'autres filtres, vérifier si le moule à 6 est toujours là
-                // Afficher l'écran quand il n'y a pas de résultats
-                // Vérifier à la suppression du champ principal s'il prend bien en compte toutes les recettes 
-                
                 // Après avoir supprimé un tag
                 if (newListAfterSearch != 0){
-                    console.log("j'ai suppr un tag, nlas != 0")
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
-                    console.log("la nouvelle liste normalement la bonne", newListAfterTag)
                     let newList = [];
                     performSearch(recipes, inputValue, newList);
                     filterUpdate(newList, tagList);
@@ -90,9 +82,7 @@ export function displayTags (){
                     });
                     setFilters(newListAfterUpdate);
                     displayTags();
-                    console.log("c koi nouvelle liste after update", newListAfterUpdate)
                 } else {
-                    console.log("j'ai suppr un tag, nlas =0")
                     filterUpdate(recipes, tagList);
                     let optionList = document.querySelectorAll(".filter_option");
                     optionList.forEach(li => {
@@ -119,8 +109,6 @@ export function displayTags (){
                         // Reset de la liste aftertag pour afficher toutes les recettes si suppression du champ
                         newListAfterTag = []
                     } else {
-                        console.log("la liste de tag est vide, je remets à zéro");
-                        console.log("liste vide", newListAfterTag);
                         recipeContainer.innerHTML = "";
                         cardTemplate(recipes);
                         updateRecipeNumber(recipes);
@@ -140,15 +128,10 @@ export function displayTags (){
             removeBtnList.addEventListener("click", removeTags);
             
             // Après avoir ajouté un nouveau tag
-            console.log("nlas après recherche = ", newListAfterSearch)
-
             if (newListAfterSearch != 0){
-                console.log("nlas != 0")
                 filterUpdate(newListAfterSearch, tagList);
                 newListAfterTag = newList;
-                console.log("la newlist ici", newList)
             } else {
-                console.log("nlas = 0")
                 filterUpdate(recipes, tagList);
             }
 

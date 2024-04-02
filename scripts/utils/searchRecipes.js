@@ -10,21 +10,17 @@ const recipeContainer = document.querySelector(".container_recipes");
 export let newListAfterSearch = [];
 
 export function searchRecipes(recipes, newList) {
-    console.log("search recipes");
     mainSearchbar.addEventListener("input", () => {
         const inputValue = mainSearchbar.value.toLowerCase();
-        console.log(inputValue);
         newList = [];
 
         if (inputValue.length >= 3 && newListAfterTag.length > 0) {
-            console.log("search 1");
             performSearch(newListAfterTag, inputValue, newList);
             resetAndUpdateDisplay(newList);
         } else if (inputValue.length < 3 && newListAfterTag.length > 0){
             filterUpdate(recipes, tagList);
             resetAndUpdateDisplay(newListAfterUpdate);
         } else {
-            console.log("retour à zéro")
             resetAndUpdateDisplay(recipes);
         }
         
@@ -33,46 +29,35 @@ export function searchRecipes(recipes, newList) {
 }
 
 export function performSearch(recipes, inputValue, newList){
-    for (let i = 0; i < recipes.length; i++) {
-        console.log("perform search");
+
+    recipes.forEach(recipe => {
         let foundInName = false;
         let foundInDescription = false;
         let foundInIngredients = false;
 
-        // Utilisation d'une boucle pour vérifier chaque caractère du nom de la recette
-        for (let j = 0; j <= recipes[i].name.length - inputValue.length; j++) {
-            // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
-            if (recipes[i].name.substring(j, j + inputValue.length).toLowerCase() === inputValue) {
-                foundInName = true;
-                break; // Sortir de la boucle interne si une correspondance est trouvée
-            }
+        // Vérifier si la sous-chaîne de la longueur de inputValue correspond à inputValue
+        if (recipe.name.toLowerCase().includes(inputValue)) {
+            foundInName = true;
         }
-        // Utilisation d'une boucle pour vérifier chaque caractère de la description de la recette
-        for (let j = 0; j <= recipes[i].description.length - inputValue.length; j++) {
-            if (recipes[i].description.substring(j, j + inputValue.length).toLowerCase() === inputValue) {
-                foundInDescription = true;
-                break;
-            }
+
+        if (recipe.description.toLowerCase().includes(inputValue)) {
+            foundInDescription = true;
         }
-        // Utilisation d'une boucle pour vérifier chaque caractère des ingrédients de la recette
-        for (let j = 0; j < recipes[i].ingredients.length; j++) {
-            const itemIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
-            for (let k = 0; k <= itemIngredients.length - inputValue.length; k++) {
-                if (itemIngredients.substring(k, k + inputValue.length).toLowerCase() === inputValue) {
-                    foundInIngredients = true;
-                    break;
-                }
+
+        recipe.ingredients.forEach(element => {
+            if (element.ingredient.toLowerCase().includes(inputValue)) {
+                foundInIngredients = true;
             }
-        }
+        });  
+
         // Affichage de la recette si une correspondance est trouvée dans au moins l'une des parties de la recette
         if (foundInName || foundInDescription || foundInIngredients) {
-            newList.push(recipes[i]);
+            newList.push(recipe);
         }
-    }
+    })
 }
 
 export function resetAndUpdateDisplay(list){
-    console.log("reset and update display");
     // On vide le conteneur principal et aussi les filtres
     recipeContainer.innerHTML = "";
     let optionList = document.querySelectorAll(".filter_option");

@@ -88,7 +88,6 @@ export function setFilters(recipes) {
     const inputIngredients = inputs[0];
     inputIngredients.addEventListener("input", () => {
         const inputValue = inputIngredients.value.toLowerCase();
-        console.log(inputValue);
 
         // On vide la liste existante des filtres
         filterListIngredients.innerHTML = "";
@@ -111,7 +110,6 @@ export function setFilters(recipes) {
     const inputAppliances = inputs[1];
     inputAppliances.addEventListener("input", () => {
         const inputValue = inputAppliances.value.toLowerCase();
-        console.log(inputValue);
 
         // Vider la liste existante des filtres
         filterListAppliances.innerHTML = "";
@@ -132,7 +130,6 @@ export function setFilters(recipes) {
     const inputUtensils = inputs[2];
     inputUtensils.addEventListener("input", () => {
         const inputValue = inputUtensils.value.toLowerCase();
-        console.log(inputValue);
 
         // Vider la liste existante des filtres
         filterListUtensils.innerHTML = "";
