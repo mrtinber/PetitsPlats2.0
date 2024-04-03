@@ -10,21 +10,17 @@ const recipeContainer = document.querySelector(".container_recipes");
 export let newListAfterSearch = [];
 
 export function searchRecipes(recipes, newList) {
-    console.log("search recipes");
     mainSearchbar.addEventListener("input", () => {
         const inputValue = mainSearchbar.value.toLowerCase();
-        console.log(inputValue);
         newList = [];
 
         if (inputValue.length >= 3 && newListAfterTag.length > 0) {
-            console.log("search 1");
             performSearch(newListAfterTag, inputValue, newList);
             resetAndUpdateDisplay(newList);
         } else if (inputValue.length < 3 && newListAfterTag.length > 0){
             filterUpdate(recipes, tagList);
             resetAndUpdateDisplay(newListAfterUpdate);
         } else {
-            console.log("retour à zéro")
             resetAndUpdateDisplay(recipes);
         }
         
@@ -34,7 +30,6 @@ export function searchRecipes(recipes, newList) {
 
 export function performSearch(recipes, inputValue, newList){
     for (let i = 0; i < recipes.length; i++) {
-        console.log("perform search");
         let foundInName = false;
         let foundInDescription = false;
         let foundInIngredients = false;
@@ -72,7 +67,6 @@ export function performSearch(recipes, inputValue, newList){
 }
 
 export function resetAndUpdateDisplay(list){
-    console.log("reset and update display");
     // On vide le conteneur principal et aussi les filtres
     recipeContainer.innerHTML = "";
     let optionList = document.querySelectorAll(".filter_option");
@@ -83,7 +77,7 @@ export function resetAndUpdateDisplay(list){
     if (list.length === 0){
         const inputValue = mainSearchbar.value.trim();
         const noMatchMessage = document.createElement("div");
-        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${inputValue}"`
+        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${inputValue}"`;
         recipeContainer.appendChild(noMatchMessage);
         updateRecipeNumber(list);
     } else {

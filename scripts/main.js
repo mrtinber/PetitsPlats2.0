@@ -5,9 +5,6 @@ import { displayTags } from "./templates/displayTags.js";
 import { closeAllDropdowns } from "./utils/closeAllDropdowns.js";
 import { searchRecipes } from "./utils/searchRecipes.js";
 
-
-// 4 variables: searchglobal; tagutensil; tagapparel; tagingredient
-
 // Création de la liste qui accueillera les recettes correspondantes
 export let newList = recipes;
 
@@ -38,13 +35,13 @@ const btnArrow = document.querySelectorAll(".fa-chevron-down");
 for (let i = 0; i < btnFilter.length; i++) {
     btnFilter[i].addEventListener("click", () => {
         if (!btnDropdown[i].classList.contains("max-h-80")) {
-            closeAllDropdowns()
+            closeAllDropdowns();
             btnDropdown[i].classList.remove("max-h-0");
             btnDropdown[i].classList.add("max-h-80");
             btnFilter[i].classList.add("rounded-b-none");
             btnArrow[i].style.rotate = "-180deg";
         } else {
-            closeAllDropdowns()
+            closeAllDropdowns();
             btnDropdown[i].classList.add("max-h-0");
             btnDropdown[i].classList.remove("max-h-80");
             btnFilter[i].classList.remove("rounded-b-none");
@@ -77,7 +74,6 @@ inputs.forEach(input => {
 export let newListAfterUpdate;
 
 export function filterUpdate(recipes, tagList) {
-    console.log("filter update");
     // Reset newList à chaque nouvelle mise à jour
     newList = [];
 
@@ -135,12 +131,12 @@ export function filterUpdate(recipes, tagList) {
 
 export function updateRecipeNumber (newList){
     const nbRecipes = document.getElementById("nbRecipes");
-    const number = newList.length
+    const number = newList.length;
 
     if (number >= 2){
-        nbRecipes.innerText = `${number} recettes`
+        nbRecipes.innerText = `${number} recettes`;
     } else {
-        nbRecipes.innerText = `${number} recette`
+        nbRecipes.innerText = `${number} recette`;
     }
 }
 

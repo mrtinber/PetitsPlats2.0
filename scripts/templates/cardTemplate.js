@@ -9,7 +9,7 @@ export function cardTemplate(recipes) {
         recipeTime.setAttribute("class", "recipe_time");
         recipeTime.innerHTML = `
             <p class="font-content text-xs">${recipe.time}min</p>
-        `
+        `;
         recipeCard.appendChild(recipeTime);
 
         const recipePicture = document.createElement("img");
@@ -25,16 +25,16 @@ export function cardTemplate(recipes) {
         const recipeContent = document.createElement("div");
         recipeContent.setAttribute("class", "recipe_content");
         const recipeInstructions = document.createElement("div");
-        recipeInstructions.setAttribute("class", "flex flex-col gap-4")
+        recipeInstructions.setAttribute("class", "flex flex-col gap-4");
         recipeInstructions.innerHTML = `
                 <h4 class="uppercase font-content text-xs">Recette</h4>
                 <p class="text-sm overflow-hidden text-ellipsis text-justify h-20">${recipe.description}</p>
-        `
+        `;
         const recipeIngredients = document.createElement("div");
-        recipeIngredients.setAttribute("class", "flex flex-col gap-4")
+        recipeIngredients.setAttribute("class", "flex flex-col gap-4");
         recipeIngredients.innerHTML = `
             <h4 class="uppercase font-content text-xs">Ingrédients</h4>
-        `
+        `;
 
         const ingredientsWrapper = document.createElement("div");
         ingredientsWrapper.setAttribute("class", "flex flex-wrap");
@@ -46,7 +46,7 @@ export function cardTemplate(recipes) {
             ingredientUnit.innerHTML = `
                 <h5 class="text-black1 font-content text-sm font-medium">${ingredient.ingredient}</h5>
                 <p class="text-grey2 font-content text-sm">${ingredient.quantity ? ingredient.quantity : ""} ${ingredient.unit ? ingredient.unit : ""}</p>
-            `
+            `;
             ingredientsWrapper.appendChild(ingredientUnit);
         });
 

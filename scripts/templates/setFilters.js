@@ -21,14 +21,14 @@ export function setFilters(recipes) {
     let uniqueIngredientsArray = [...uniqueIngredientsSet];
 
     // Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
-    const filterListIngredients = document.querySelector(".filter_list_ingredients")
+    const filterListIngredients = document.querySelector(".filter_list_ingredients");
 
     uniqueIngredientsArray.forEach(element => {
         const filterOption = document.createElement("li");
         filterOption.setAttribute("class", "filter_option");
         filterOption.innerText = `${element}`;
         filterListIngredients.appendChild(filterOption);
-    })
+    });
 
     // Retrouver tous les appareils disponibles dans les recettes
     let allAppliances = [];
@@ -45,7 +45,7 @@ export function setFilters(recipes) {
     const uniqueAppliancesArray = [...uniqueAppliancesSet];
 
     // Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
-    const filterListAppliances = document.querySelector(".filter_list_appliances")
+    const filterListAppliances = document.querySelector(".filter_list_appliances");
 
     uniqueAppliancesArray.forEach(element => {
         const filterOption = document.createElement("li");
@@ -73,7 +73,7 @@ export function setFilters(recipes) {
     const uniqueUtensilsArray = [...uniqueUtensilsSet];
 
     // Ajout de cette liste à la liste déroulante du filtre "Ingrédients"
-    const filterListUtensils = document.querySelector(".filter_list_utensils")
+    const filterListUtensils = document.querySelector(".filter_list_utensils");
 
     uniqueUtensilsArray.forEach(element => {
         const filterOption = document.createElement("li");
@@ -88,7 +88,6 @@ export function setFilters(recipes) {
     const inputIngredients = inputs[0];
     inputIngredients.addEventListener("input", () => {
         const inputValue = inputIngredients.value.toLowerCase();
-        console.log(inputValue);
 
         // On vide la liste existante des filtres
         filterListIngredients.innerHTML = "";
@@ -111,7 +110,6 @@ export function setFilters(recipes) {
     const inputAppliances = inputs[1];
     inputAppliances.addEventListener("input", () => {
         const inputValue = inputAppliances.value.toLowerCase();
-        console.log(inputValue);
 
         // Vider la liste existante des filtres
         filterListAppliances.innerHTML = "";
@@ -132,7 +130,6 @@ export function setFilters(recipes) {
     const inputUtensils = inputs[2];
     inputUtensils.addEventListener("input", () => {
         const inputValue = inputUtensils.value.toLowerCase();
-        console.log(inputValue);
 
         // Vider la liste existante des filtres
         filterListUtensils.innerHTML = "";
@@ -148,5 +145,5 @@ export function setFilters(recipes) {
         });
 
         displayTags(recipes);
-    })
+    });
 }
