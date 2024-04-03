@@ -85,6 +85,7 @@ export function displayTags() {
                 if (tagList.length === 0) {
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
+                    console.log("inputvalue", inputValue)
                     if (inputValue != "") {
                         let newList = [];
                         performSearch(recipes, inputValue, newList);

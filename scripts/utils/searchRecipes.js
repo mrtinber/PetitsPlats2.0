@@ -21,7 +21,8 @@ export function searchRecipes(recipes, newList) {
             updateAfterTag(recipes, tagList);
             resetAndUpdateDisplay(newListAfterUpdate);
         } else {
-            resetAndUpdateDisplay(recipes);
+            performSearch(recipes, inputValue);
+            resetAndUpdateDisplay(newListAfterSearch);
         }
         
         newListAfterSearch = newList;
