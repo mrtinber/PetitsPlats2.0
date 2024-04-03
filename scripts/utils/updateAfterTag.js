@@ -1,7 +1,3 @@
-import { cardTemplate } from "../templates/cardTemplate.js";
-
-const recipeContainer = document.querySelector(".container_recipes");
-
 export let newListAfterUpdate;
 
 export function updateAfterTag(recipes, tagList) {
@@ -53,10 +49,6 @@ export function updateAfterTag(recipes, tagList) {
         }
     }
 
-    // Mettre à jour l'affichage des recettes avec newList
-    recipeContainer.innerHTML = "";
-    cardTemplate(newList);
-    updateRecipeNumber(newList);
     newListAfterUpdate = newList;
     return newListAfterUpdate;
 }

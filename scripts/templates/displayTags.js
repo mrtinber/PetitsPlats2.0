@@ -1,9 +1,7 @@
 import { newList } from "../main.js";
 import { newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
-import { cardTemplate } from "./cardTemplate.js";
 import recipes from "../data/recipes.js";
-import { setFilters } from "./setFilters.js";
-import { updateAfterTag, updateRecipeNumber, newListAfterUpdate } from "../utils/updateAfterTag.js";
+import { updateAfterTag, newListAfterUpdate } from "../utils/updateAfterTag.js";
 
 const recipeContainer = document.querySelector(".container_recipes");
 const tagBar = document.querySelector(".tag_bar");
@@ -77,10 +75,10 @@ export function displayTags() {
                     let newList = [];
                     performSearch(recipes, inputValue, newList);
                     updateAfterTag(newListAfterSearch, tagList);
-                    updateFilterList(newListAfterUpdate);
+                    resetAndUpdateDisplay(newListAfterUpdate);
                 } else {
                     updateAfterTag(recipes, tagList);
-                    updateFilterList(newListAfterUpdate);
+                    resetAndUpdateDisplay(newListAfterUpdate);
                 }
 
                 // Affiche toutes les recettes après suppression de tous les filtres
@@ -91,14 +89,10 @@ export function displayTags() {
                         let newList = [];
                         performSearch(recipes, inputValue, newList);
                         resetAndUpdateDisplay(newListAfterSearch);
-                        updateFilterList(newListAfterSearch);
                         // Reset de la liste aftertag pour afficher toutes les recettes si suppression du champ
                         newListAfterTag = [];
                     } else {
-                        recipeContainer.innerHTML = "";
-                        cardTemplate(recipes);
-                        updateRecipeNumber(recipes);
-                        updateFilterList(recipes);
+                        resetAndUpdateDisplay(recipes);
                     }
                 }
             }
@@ -111,25 +105,13 @@ export function displayTags() {
             if (newListAfterSearch != 0) {
                 updateAfterTag(newListAfterSearch, tagList);
                 newListAfterTag = newList;
-                updateFilterList(newListAfterUpdate);
+                resetAndUpdateDisplay(newListAfterUpdate);
             } else {
                 updateAfterTag(recipes, tagList);
-                updateFilterList(newListAfterUpdate);
+                resetAndUpdateDisplay(newListAfterUpdate);
             }
         });
     });
     // Stocker la nouvelle liste dans une variable plus claire
     newListAfterTag = newList;
-}
-
-// Fonction qui vide la liste d'options des filtres pour la remplacer par une nouvelle, mise à jour par la recherche
-function updateFilterList(list) {
-    let optionList = document.querySelectorAll(".filter_option");
-
-    optionList.forEach(li => {
-        li.remove();
-    });
-
-    setFilters(list);
-    displayTags();
 }
