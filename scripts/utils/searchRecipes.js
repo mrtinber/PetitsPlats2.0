@@ -8,10 +8,8 @@ const recipeContainer = document.querySelector(".container_recipes");
 export let newListAfterSearch = [];
 export let inputValue = mainSearchbar.value.toLowerCase();
 
-export function searchRecipes(recipes, newList) {
-    
+export function searchRecipes(recipes) {  
     mainSearchbar.addEventListener("input", () => {
-        newList = [];
         inputValue = mainSearchbar.value.toLowerCase();
 
         if (inputValue.length >= 3 || tagList.length > 0) {

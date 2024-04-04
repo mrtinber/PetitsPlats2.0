@@ -1,16 +1,13 @@
 import { inputValue, newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
 import recipes from "../data/recipes.js";
 
-const recipeContainer = document.querySelector(".container_recipes");
 const tagBar = document.querySelector(".tag_bar");
 
 export let tagList = [];
-export let newListAfterTag = [];
 
 export function displayTags() {
 
     let optionList = document.querySelectorAll(".filter_option");
-    newListAfterTag = [];
 
     // On parcourt chaque option des listes déroulantes et on écoute l'événement "clic"
     optionList.forEach(option => {

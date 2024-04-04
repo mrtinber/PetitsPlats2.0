@@ -5,20 +5,17 @@ import { displayTags } from "./templates/displayTags.js";
 import { closeAllDropdowns } from "./utils/closeAllDropdowns.js";
 import { searchRecipes } from "./utils/searchRecipes.js";
 
-// Création de la liste qui accueillera les recettes correspondantes
-export let newList = recipes;
-
-function init(recipes, newList) {
+function init(list) {
     // Génération des cards pour chaque recette dans les données
-    cardTemplate(recipes);
+    cardTemplate(list);
     // Lancement de la fonction qui permet de fermer les listes déroulantes
     closeAllDropdowns();
     // Lancement de la fonction qui permet de générer le contenu des listes déroulantes des filtres
-    setFilters(recipes);
+    setFilters(list);
     // Création des tags à la sélection d'un élément dans les filtres
-    displayTags(newList);
+    displayTags();
     // Recherche de recettes correspondantes via la barre principale
-    searchRecipes(recipes, newList);
+    searchRecipes(list);
 }
 
 // Boutons de filtres
