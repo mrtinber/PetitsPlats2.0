@@ -1,7 +1,5 @@
-import { newList } from "../main.js";
-import { newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
+import { inputValue, newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
 import recipes from "../data/recipes.js";
-import { updateAfterTag, newListAfterUpdate } from "../utils/updateAfterTag.js";
 
 const recipeContainer = document.querySelector(".container_recipes");
 const tagBar = document.querySelector(".tag_bar");
@@ -60,7 +58,6 @@ export function displayTags() {
             function removeTags() {
                 newTag.remove();
                 newListTag.remove();
-                recipeContainer.innerHTML = "";
 
                 // Retire l'élément supprimé de la liste tagList
                 const index = tagList.indexOf(newTag);
@@ -68,51 +65,28 @@ export function displayTags() {
                     tagList.splice(index, 1);
                 }
 
-                // Après avoir supprimé un tag
-                if (newListAfterSearch != 0) {
-                    const mainSearchbar = document.querySelector("nav input");
-                    const inputValue = mainSearchbar.value.toLowerCase();
-                    let newList = [];
-                    performSearch(recipes, inputValue, newList);
-                    updateAfterTag(newListAfterSearch, tagList);
-                    resetAndUpdateDisplay(newListAfterUpdate);
-                } else {
-                    updateAfterTag(recipes, tagList);
-                    resetAndUpdateDisplay(newListAfterUpdate);
-                }
-
                 // Affiche toutes les recettes après suppression de tous les filtres
                 if (tagList.length === 0) {
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
-                    console.log("inputvalue", inputValue)
                     if (inputValue != "") {
-                        let newList = [];
-                        performSearch(recipes, inputValue, newList);
+                        performSearch(recipes, inputValue);
                         resetAndUpdateDisplay(newListAfterSearch);
-                        // Reset de la liste aftertag pour afficher toutes les recettes si suppression du champ
-                        newListAfterTag = [];
                     } else {
                         resetAndUpdateDisplay(recipes);
                     }
                 }
+
+                performSearch(recipes, inputValue);
+                resetAndUpdateDisplay(newListAfterSearch);
             }
 
             // Ajout de l'écouteur d'événement de suppression aux deux boutons de suppression
             removeBtnTag.addEventListener("click", removeTags);
             removeBtnList.addEventListener("click", removeTags);
 
-            // Après avoir ajouté un nouveau tag
-            if (newListAfterSearch != 0) {
-                updateAfterTag(newListAfterSearch, tagList);
-                newListAfterTag = newList;
-                resetAndUpdateDisplay(newListAfterUpdate);
-            } else {
-                updateAfterTag(recipes, tagList);
-                resetAndUpdateDisplay(newListAfterUpdate);
-            }
+            performSearch(recipes, inputValue);
+            resetAndUpdateDisplay(newListAfterSearch);
         });
     });
-    // Stocker la nouvelle liste dans une variable plus claire
-    newListAfterTag = newList;
 }

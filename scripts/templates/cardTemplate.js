@@ -56,4 +56,17 @@ export function cardTemplate(recipes) {
 
         recipeSection.appendChild(recipeCard);
     });
+
+    updateRecipeNumber(recipes);
+}
+
+function updateRecipeNumber (list){
+    const nbRecipes = document.getElementById("nbRecipes");
+    const number = list.length;
+
+    if (number >= 2){
+        nbRecipes.innerText = `${number} recettes`;
+    } else {
+        nbRecipes.innerText = `${number} recette`;
+    }
 }

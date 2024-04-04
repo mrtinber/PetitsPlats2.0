@@ -4,7 +4,6 @@ import { setFilters } from "./templates/setFilters.js";
 import { displayTags } from "./templates/displayTags.js";
 import { closeAllDropdowns } from "./utils/closeAllDropdowns.js";
 import { searchRecipes } from "./utils/searchRecipes.js";
-import { updateRecipeNumber } from "./utils/updateAfterTag.js";
 
 // Création de la liste qui accueillera les recettes correspondantes
 export let newList = recipes;
@@ -20,8 +19,6 @@ function init(recipes, newList) {
     displayTags(newList);
     // Recherche de recettes correspondantes via la barre principale
     searchRecipes(recipes, newList);
-    // Génère le nombre de recettes affichées sur la page
-    updateRecipeNumber(recipes);
 }
 
 // Boutons de filtres
