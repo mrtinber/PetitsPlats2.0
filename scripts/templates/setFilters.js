@@ -1,5 +1,4 @@
 import { displayTags } from "./displayTags.js";
-import { closeAllDropdowns } from "../utils/closeAllDropdowns.js";
 
 export function setFilters(recipes) {
     // Retrouver les ingrédients dans le tableau
