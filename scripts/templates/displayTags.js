@@ -1,4 +1,4 @@
-import { inputValue, newListAfterSearch, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
+import { inputValue, performSearch, resetAndUpdateDisplay } from "../utils/searchRecipes.js";
 import recipes from "../data/recipes.js";
 
 const tagBar = document.querySelector(".tag_bar");
@@ -67,14 +67,14 @@ export function displayTags() {
                     const mainSearchbar = document.querySelector("nav input");
                     const inputValue = mainSearchbar.value.toLowerCase();
                     if (inputValue != "") {
-                        performSearch(recipes, inputValue);
+                        const newListAfterSearch = performSearch(recipes, inputValue);
                         resetAndUpdateDisplay(newListAfterSearch);
                     } else {
                         resetAndUpdateDisplay(recipes);
                     }
                 }
 
-                performSearch(recipes, inputValue);
+                const newListAfterSearch = performSearch(recipes, inputValue);
                 resetAndUpdateDisplay(newListAfterSearch);
             }
 
@@ -82,7 +82,7 @@ export function displayTags() {
             removeBtnTag.addEventListener("click", removeTags);
             removeBtnList.addEventListener("click", removeTags);
 
-            performSearch(recipes, inputValue);
+            const newListAfterSearch = performSearch(recipes, inputValue);
             resetAndUpdateDisplay(newListAfterSearch);
         });
     });

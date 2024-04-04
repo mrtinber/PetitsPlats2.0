@@ -5,7 +5,7 @@ import { displayTags, tagList } from "../templates/displayTags.js";
 // Implémentation de la recherche avec boucles natives (for, while, ...)
 const mainSearchbar = document.querySelector("nav input");
 const recipeContainer = document.querySelector(".container_recipes");
-export let newListAfterSearch = [];
+let newList = [];
 export let inputValue = mainSearchbar.value.toLowerCase();
 
 export function searchRecipes(recipes) {  
@@ -13,7 +13,7 @@ export function searchRecipes(recipes) {
         inputValue = mainSearchbar.value.toLowerCase();
 
         if (inputValue.length >= 3 || tagList.length > 0) {
-            performSearch(recipes, inputValue);
+            const newListAfterSearch = performSearch(recipes, inputValue);
             resetAndUpdateDisplay(newListAfterSearch);
         } else {
             resetAndUpdateDisplay(recipes);
@@ -23,7 +23,7 @@ export function searchRecipes(recipes) {
 
 export function performSearch(recipes, inputValue) {
 
-    return newListAfterSearch = recipes.filter(recipe => {
+    return newList = recipes.filter(recipe => {
         let foundInName = false
         let foundInDescription = false
         let foundInIngredients = false
