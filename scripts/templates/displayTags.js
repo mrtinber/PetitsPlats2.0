@@ -22,8 +22,9 @@ export function displayTags() {
             `;
             tagBar.appendChild(newTag);
 
-            // On ajoute ce nouvel élément tag à la liste tagList
-            tagList.push(newTag);
+            // On crée une variable pour le texte du tag et on ajoute ce texte à la liste de tags
+            const tagText = option.innerText.toLowerCase();
+            tagList.push(tagText);
 
             // Ajout du tag dans la liste déroulante correspondante
             const parentClassName = option.parentNode.className;
@@ -46,7 +47,7 @@ export function displayTags() {
             <i class="fa-solid fa-circle-xmark cursor-pointer !hidden duration-200 hover:scale-125"></i>
             `;
             dropdownFilter.insertBefore(newListTag, filterListElement);
-
+            
             // Ajout de l'écouteur d'événement de suppression à ces tags
             const removeBtnTag = newTag.querySelector(".fa-xmark");
             const removeBtnList = newListTag.querySelector(".fa-circle-xmark");
@@ -57,7 +58,7 @@ export function displayTags() {
                 newListTag.remove();
 
                 // Retire l'élément supprimé de la liste tagList
-                const index = tagList.indexOf(newTag);
+                const index = tagList.indexOf(tagText);
                 if (index !== -1) {
                     tagList.splice(index, 1);
                 }

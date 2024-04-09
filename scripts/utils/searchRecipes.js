@@ -24,9 +24,9 @@ export function searchRecipes(recipes) {
 export function performSearch(recipes, inputValue) {
 
     return newList = recipes.filter(recipe => {
-        let foundInName = false
-        let foundInDescription = false
-        let foundInIngredients = false
+        let foundInName = false;
+        let foundInDescription = false;
+        let foundInIngredients = false;
 
         if (inputValue !== "") {
             foundInName = recipe.name.toLowerCase().includes(inputValue);
@@ -39,10 +39,9 @@ export function performSearch(recipes, inputValue) {
         // Vérifie si tagList est non vide
         if (tagList.length !== 0) {
             tagFound = tagList.every(tag => {
-                const tagText = tag.querySelector("p").innerText.toLowerCase();
-                return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tagText)) ||
-                    recipe.appliance.toLowerCase().includes(tagText) ||
-                    recipe.ustensils.some(utensil => utensil.toLowerCase().includes(tagText));
+                return recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(tag)) ||
+                    recipe.appliance.toLowerCase().includes(tag) ||
+                    recipe.ustensils.some(utensil => utensil.toLowerCase().includes(tag));
             });
         }
 
