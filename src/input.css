@@ -22,14 +22,11 @@
         @apply absolute top-5 right-5 bg-yellow1 rounded-xl px-4 py-1;
     }
     .btn_search {
-        @apply absolute rounded-xl h-12 w-12 bg-black1 right-2.5 duration-300;
+        @apply absolute rounded-xl h-12 w-12 bg-black1 right-2.5 duration-300 flex items-center justify-center;
     }
     .btn_search:hover {
         @apply bg-yellow1;
     }
-    /* .btn-search:hover .fa-magnifying-glass {
-        color: black;
-    } */
     input[type="search"]::-webkit-search-cancel-button {
         @apply search-cancel-button;
     }
@@ -44,7 +41,7 @@
         @apply max-h-0 overflow-hidden absolute top-full left-0 w-48 bg-white rounded-b-xl z-50 shadow-sm overflow-y-auto duration-300 ease-in-out;
     }
     .filter_search{
-        @apply border border-grey3 rounded-sm w-full py-2 pl-2 pr-6 text-grey2;
+        @apply border border-grey3 rounded-sm w-full py-2 pl-2 pr-8 text-grey2;
     }
     .filter_tag{
         @apply rounded-xl bg-yellow1 p-4 flex items-center gap-14;

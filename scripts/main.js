@@ -21,7 +21,7 @@ function init(list) {
 // Boutons de filtres
 const btnFilter = document.querySelectorAll(".btn_filter");
 const btnDropdown = document.querySelectorAll(".dropdown_filter");
-const btnArrow = document.querySelectorAll(".fa-chevron-down");
+const btnArrow = document.querySelectorAll(".chevron_icon");
 
 for (let i = 0; i < btnFilter.length; i++) {
     btnFilter[i].addEventListener("click", () => {

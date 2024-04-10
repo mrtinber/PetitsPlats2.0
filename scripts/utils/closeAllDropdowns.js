@@ -2,7 +2,7 @@
 export function closeAllDropdowns() {
     const allDropdowns = document.querySelectorAll(".dropdown_filter");
     const allBtns = document.querySelectorAll(".btn_filter");
-    const allArrows = document.querySelectorAll(".fa-chevron-down");
+    const allArrows = document.querySelectorAll(".chevron_icon");
 
     allDropdowns.forEach(dropdown => {
         dropdown.classList.add("max-h-0");
