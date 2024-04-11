@@ -1,3 +1,4 @@
+import { cleanInput } from "../utils/searchRecipes.js";
 import { displayTags } from "./displayTags.js";
 
 export function setFilters(recipes) {
@@ -77,7 +78,8 @@ export function setFilters(recipes) {
     // Ecoute de l'input pour mettre à jour les listes des filtres
     const inputIngredients = inputs[0];
     inputIngredients.addEventListener("input", () => {
-        const inputValue = inputIngredients.value.toLowerCase();
+        // On nettoie l'input pour éviter les attaques XSS
+        const inputValue = cleanInput(inputIngredients.value.toLowerCase().trim());
 
         // On vide la liste existante des filtres
         filterListIngredients.innerHTML = "";
@@ -96,9 +98,8 @@ export function setFilters(recipes) {
 
     const inputAppliances = inputs[1];
     inputAppliances.addEventListener("input", () => {
-        const inputValue = inputAppliances.value.toLowerCase();
+        const inputValue = cleanInput(inputAppliances.value.toLowerCase().trim());
 
-        // Vider la liste existante des filtres
         filterListAppliances.innerHTML = "";
 
         uniqueAppliancesArray.forEach(element => {
@@ -113,9 +114,8 @@ export function setFilters(recipes) {
 
     const inputUtensils = inputs[2];
     inputUtensils.addEventListener("input", () => {
-        const inputValue = inputUtensils.value.toLowerCase();
+        const inputValue = cleanInput(inputUtensils.value.toLowerCase().trim());
 
-        // Vider la liste existante des filtres
         filterListUtensils.innerHTML = "";
 
         uniqueUtensilsArray.forEach(element => {
@@ -130,7 +130,7 @@ export function setFilters(recipes) {
 }
 
 // Fonction commune pour créer la liste d'options et l'attacher au filtre correspondant
-function createFilters(list, element){
+function createFilters(list, element) {
     const filterOption = document.createElement("li");
     filterOption.setAttribute("class", "filter_option");
     filterOption.innerText = element;

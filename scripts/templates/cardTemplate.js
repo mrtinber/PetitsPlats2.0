@@ -60,11 +60,11 @@ export function cardTemplate(recipes) {
     updateRecipeNumber(recipes);
 }
 
-function updateRecipeNumber (list){
+function updateRecipeNumber(list) {
     const nbRecipes = document.getElementById("nbRecipes");
     const number = list.length;
 
-    if (number >= 2){
+    if (number >= 2) {
         nbRecipes.innerText = `${number} recettes`;
     } else {
         nbRecipes.innerText = `${number} recette`;

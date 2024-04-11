@@ -8,12 +8,14 @@ const recipeContainer = document.querySelector(".container_recipes");
 
 export let inputValue = mainSearchbar.value.toLowerCase();
 
-export function searchRecipes(recipes) {  
+export function searchRecipes(recipes) {
     mainSearchbar.addEventListener("input", () => {
         inputValue = mainSearchbar.value.toLowerCase();
+        // On nettoie l'input pour éviter les attaques XSS
+        const cleanedInput = cleanInput(inputValue.trim());
 
         if (inputValue.length >= 3 || tagList.length > 0) {
-            const newListAfterSearch = performSearch(recipes, inputValue);
+            const newListAfterSearch = performSearch(recipes, cleanedInput);
             resetAndUpdateDisplay(newListAfterSearch);
         } else {
             resetAndUpdateDisplay(recipes);
@@ -65,7 +67,10 @@ export function performSearch(recipes, inputValue) {
     });
 }
 
-export function resetAndUpdateDisplay(list){
+export function resetAndUpdateDisplay(list) {
+    // On nettoie l'input pour éviter les attaques XSS
+    const cleanedInput = cleanInput(inputValue.trim());
+
     // On vide le conteneur principal et aussi les filtres
     recipeContainer.innerHTML = "";
     let optionList = document.querySelectorAll(".filter_option");
@@ -73,15 +78,29 @@ export function resetAndUpdateDisplay(list){
         li.remove();
     });
 
-    if (list.length === 0){
-        const inputValue = mainSearchbar.value.trim();
+    if (list.length === 0) {
         const noMatchMessage = document.createElement("div");
-        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${inputValue}"`;
+        noMatchMessage.innerText = `Désolé, il n'y a aucun résultat pour "${cleanedInput}"`;
         recipeContainer.appendChild(noMatchMessage);
+        cardTemplate(list);
     } else {
         // On relance les fonctions de génération
         cardTemplate(list);
         setFilters(list);
         displayTags();
     }
+}
+
+// Fonction pour nettoyer l'input et éviter les attaques XSS
+export function cleanInput(input) {
+    // Remplace les caractères spéciaux par leur équivalent HTML
+    return input.replace(/[&<>"']/g, function (match) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#x27;",
+            "\"": "&quot;"
+        }[match];
+    });
 }

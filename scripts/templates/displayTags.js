@@ -31,11 +31,11 @@ export function displayTags() {
             let dropdownFilter;
 
             if (parentClassName.includes("filter_list_ingredients")) {
-                dropdownFilter = document.querySelector('.filter_list_ingredients');
+                dropdownFilter = document.querySelector(".filter_list_ingredients");
             } else if (parentClassName.includes("filter_list_appliances")) {
-                dropdownFilter = document.querySelector('.filter_list_appliances');
+                dropdownFilter = document.querySelector(".filter_list_appliances");
             } else if (parentClassName.includes("filter_list_utensils")) {
-                dropdownFilter = document.querySelector('.filter_list_utensils');
+                dropdownFilter = document.querySelector(".filter_list_utensils");
             }
 
             const filterListElement = dropdownFilter.querySelector("li");
@@ -47,7 +47,7 @@ export function displayTags() {
             <i class="fa-solid fa-circle-xmark cursor-pointer !hidden duration-200 hover:scale-125"></i>
             `;
             dropdownFilter.insertBefore(newListTag, filterListElement);
-            
+
             // Ajout de l'écouteur d'événement de suppression à ces tags
             const removeBtnTag = newTag.querySelector(".fa-xmark");
             const removeBtnList = newListTag.querySelector(".fa-circle-xmark");

@@ -22,15 +22,17 @@
             <img src="./assets/base/circle_logo.png" alt="Image du logo" class="h-5">
         </div>
         <nav class="flex flex-col justify-center content-center items-center space-y-7">
-            <h2 class="text-5xl text-yellow1 font-title uppercase w-[48rem] text-center leading-normal">Cherchez parmi plus de 1500
+            <h2 class="text-5xl text-yellow1 font-title uppercase w-[48rem] text-center leading-normal">Cherchez parmi
+                plus de 1500
                 recettes du quotidien, simples et délicieuses</h2>
             <div class="relative flex items-center">
                 <input type="search" placeholder="Recherchez une recette, un ingrédient, ..."
                     class="w-[60rem] h-16 rounded-xl pl-8 pr-16 text-grey2">
                 <button class="btn_search">
-                    <svg class="flex items-center" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-                        <circle cx="10" cy="10" r="9.5" stroke="white"/>
-                        <line x1="18.3536" y1="18.6464" x2="27.3536" y2="27.6464" stroke="white"/>
+                    <svg class="flex items-center" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 28 28" fill="none">
+                        <circle cx="10" cy="10" r="9.5" stroke="white" />
+                        <line x1="18.3536" y1="18.6464" x2="27.3536" y2="27.6464" stroke="white" />
                     </svg>
                 </button>
             </div>
@@ -45,16 +47,20 @@
             <div class="filterbar flex gap-16">
                 <div class="btn_filter relative">
                     <p class="font-content text-black1 text-base">Ingrédients</p>
-                    <svg class="chevron_icon duration-300" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
-                        <path d="M1 7L7.5 1L14 7" stroke="#1B1B1B" stroke-linecap="round"/>
+                    <svg class="chevron_icon duration-300" xmlns="http://www.w3.org/2000/svg" width="15" height="8"
+                        viewBox="0 0 15 8" fill="none">
+                        <path d="M1 7L7.5 1L14 7" stroke="#1B1B1B" stroke-linecap="round" />
                     </svg>
                     <div class="dropdown_filter">
                         <div class="flex items-center w-[calc(100%-2rem)] m-4 relative">
                             <input type="search" class="filter_search">
-                            <svg class="absolute right-3 inset-y-auto hover:scale-110 duration-200" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5"/>
-                                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5"/>
-                            </svg>  
+                            <svg class="absolute right-3 inset-y-auto hover:scale-110 duration-200"
+                                xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
+                                fill="none">
+                                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A"
+                                    stroke-width="0.5" />
+                            </svg>
                         </div>
                         <ul class="filter_list_ingredients text-left">
                             <!-- Là où sont stockés les <li> pour chaque ingrédient disponible -->
@@ -63,16 +69,21 @@
                 </div>
                 <div class="btn_filter relative">
                     <p class="font-content text-black1 text-base">Appareils</p>
-                    <svg class="chevron_icon duration-300" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
-                        <path d="M1 7L7.5 1L14 7" stroke="#1B1B1B" stroke-linecap="round"/>
-                    </svg>                    
+                    <svg class="chevron_icon duration-300" xmlns="http://www.w3.org/2000/svg" width="15" height="8"
+                        viewBox="0 0 15 8" fill="none">
+                        <path d="M1 7L7.5 1L14 7" stroke="#1B1B1B" stroke-linecap="round" />
+                    </svg>
                     <div class="dropdown_filter">
                         <div class="flex items-center w-[calc(100%-2rem)] m-4 relative">
                             <input type="search" class="filter_search">
-                            <svg class="absolute right-3 inset-y-auto hover:scale-110 duration-200" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5"/>
-                                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5"/>
-                            </svg>                        </div>
+                            <svg class="absolute right-3 inset-y-auto hover:scale-110 duration-200"
+                                xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
+                                fill="none">
+                                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A"
+                                    stroke-width="0.5" />
+                            </svg>
+                        </div>
                         <ul class="filter_list_appliances text-left">
                             <!-- Là où sont stockés les <li> pour chaque appareil disponible -->
                         </ul>
@@ -80,16 +91,20 @@
                 </div>
                 <div class="btn_filter relative">
                     <p class="font-content text-black1 text-base">Ustensiles</p>
-                    <svg class="chevron_icon duration-300" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
-                        <path d="M1 7L7.5 1L14 7" stroke="#1B1B1B" stroke-linecap="round"/>
-                    </svg>                    
+                    <svg class="chevron_icon duration-300" xmlns="http://www.w3.org/2000/svg" width="15" height="8"
+                        viewBox="0 0 15 8" fill="none">
+                        <path d="M1 7L7.5 1L14 7" stroke="#1B1B1B" stroke-linecap="round" />
+                    </svg>
                     <div class="dropdown_filter">
                         <div class="flex items-center w-[calc(100%-2rem)] m-4 relative">
                             <input type="search" class="filter_search">
-                            <svg class="absolute right-3 inset-y-auto hover:scale-110 duration-200" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5"/>
-                                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5"/>
-                            </svg>                      
+                            <svg class="absolute right-3 inset-y-auto hover:scale-110 duration-200"
+                                xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
+                                fill="none">
+                                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A"
+                                    stroke-width="0.5" />
+                            </svg>
                         </div>
                         <ul class="filter_list_utensils text-left">
                             <!-- Là où sont stockés les <li> pour chaque ustensile disponible -->
