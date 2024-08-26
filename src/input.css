@@ -53,9 +53,9 @@
     .chosen_option:hover{
         @apply font-bold;
     }
-    .chosen_option:hover i{
+    /* .chosen_option:hover i{
         @apply !flex;
-    }
+    } */
 }
 
 @layer utilities {
